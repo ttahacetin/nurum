@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f4f2ec" />
-  <meta name="description" content="Nur için hazırlanmış, KPSS tarih konularını ezber kodları ve mini testlerle çalışabileceğin özel bir alan." />
+  <meta name="description"
+    content="Nur için hazırlanmış, KPSS tarih konularını ezber kodları ve mini testlerle çalışabileceğin özel bir alan." />
   <title>Nur'a Özel — Tarih Defteri</title>
   <style>
     :root {
@@ -29,8 +31,15 @@
       --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 95px; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 95px;
+    }
+
     body {
       margin: 0;
       background: var(--paper);
@@ -40,316 +49,1730 @@
       -webkit-font-smoothing: antialiased;
       overflow-wrap: anywhere;
     }
-    button, select { font: inherit; }
-    button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
-    button:focus-visible, select:focus-visible, a:focus-visible { outline: 3px solid rgba(183,154,101,.7); outline-offset: 3px; }
-    a { color: inherit; text-decoration: none; }
-    ::selection { background: #d9e2d4; color: var(--ink); }
 
-    .container { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+    button,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible,
+    select:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(183, 154, 101, .7);
+      outline-offset: 3px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ::selection {
+      background: #d9e2d4;
+      color: var(--ink);
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
     .site-header {
-      position: sticky; top: 0; z-index: 20;
+      position: sticky;
+      top: 0;
+      z-index: 20;
       background: rgba(244, 242, 236, .88);
-      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       border-bottom: 1px solid rgba(222, 222, 212, .78);
     }
-    .header-inner { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: inline-flex; align-items: center; gap: 12px; min-width: 0; }
+
+    .header-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
     .brand-mark {
-      display: grid; place-items: center; flex: 0 0 42px; width: 42px; height: 42px;
-      color: var(--white); background: var(--green-dark); border-radius: 50% 50% 48% 48%;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.17);
+      display: grid;
+      place-items: center;
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      color: var(--white);
+      background: var(--green-dark);
+      border-radius: 50% 50% 48% 48%;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .17);
     }
-    .brand-mark svg { width: 21px; height: 21px; }
-    .brand-copy { display: grid; gap: 1px; line-height: 1.15; }
-    .brand-copy strong { font-size: 12px; letter-spacing: .18em; font-weight: 750; }
-    .brand-copy span { color: var(--ink-soft); font-size: 11px; letter-spacing: .04em; }
-    .nav { display: flex; align-items: center; gap: 26px; color: var(--ink-soft); font-size: 13px; }
-    .nav a { transition: color .2s ease; }
-    .nav a:hover { color: var(--green-dark); }
-    .nav-love { padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--green-dark) !important; background: rgba(255,254,250,.55); }
 
-    .hero { padding: clamp(42px, 7vw, 86px) 0 42px; }
-    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(330px, .85fr); align-items: center; gap: clamp(32px, 6vw, 82px); }
-    .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .19em; text-transform: uppercase; color: var(--green); font-weight: 750; }
-    .eyebrow::before { content: ""; width: 30px; height: 1px; background: var(--gold); display: inline-block; }
-    h1, h2, h3, p { margin-top: 0; }
-    .hero h1 { margin: 19px 0 20px; font-family: var(--serif); font-weight: 500; font-size: clamp(42px, 6.1vw, 76px); line-height: .99; letter-spacing: -.045em; max-width: 700px; }
-    .hero h1 em { color: var(--green); font-style: italic; font-weight: 400; }
-    .hero-lead { color: var(--ink-soft); max-width: 560px; font-size: clamp(15px, 1.6vw, 17px); line-height: 1.85; margin-bottom: 22px; }
-    .love-line { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--green-dark); margin: 0 0 29px; }
-    .love-line svg { color: var(--rose); flex-shrink: 0; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; }
+    .brand-mark svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 1px;
+      line-height: 1.15;
+    }
+
+    .brand-copy strong {
+      font-size: 12px;
+      letter-spacing: .18em;
+      font-weight: 750;
+    }
+
+    .brand-copy span {
+      color: var(--ink-soft);
+      font-size: 11px;
+      letter-spacing: .04em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: var(--ink-soft);
+      font-size: 13px;
+    }
+
+    .nav a {
+      transition: color .2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--green-dark);
+    }
+
+    .nav-love {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--green-dark) !important;
+      background: rgba(255, 254, 250, .55);
+    }
+
+    .hero {
+      padding: clamp(42px, 7vw, 86px) 0 42px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(330px, .85fr);
+      align-items: center;
+      gap: clamp(32px, 6vw, 82px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+      color: var(--green);
+      font-weight: 750;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+      display: inline-block;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    .hero h1 {
+      margin: 19px 0 20px;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(42px, 6.1vw, 76px);
+      line-height: .99;
+      letter-spacing: -.045em;
+      max-width: 700px;
+    }
+
+    .hero h1 em {
+      color: var(--green);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero-lead {
+      color: var(--ink-soft);
+      max-width: 560px;
+      font-size: clamp(15px, 1.6vw, 17px);
+      line-height: 1.85;
+      margin-bottom: 22px;
+    }
+
+    .love-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--green-dark);
+      margin: 0 0 29px;
+    }
+
+    .love-line svg {
+      color: var(--rose);
+      flex-shrink: 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 11px;
+    }
+
     .button {
-      display: inline-flex; justify-content: center; align-items: center; gap: 10px;
-      min-height: 48px; padding: 13px 20px; border: 1px solid transparent; border-radius: 999px;
-      font-size: 13px; font-weight: 700; transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 13px 20px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
-    .button:hover { transform: translateY(-2px); }
-    .button-primary { background: var(--green-dark); color: white; box-shadow: 0 9px 20px rgba(48,72,58,.16); }
-    .button-primary:hover { background: #263d30; box-shadow: 0 12px 25px rgba(48,72,58,.2); }
-    .button-secondary { background: rgba(255,254,250,.62); border-color: var(--line); color: var(--ink); }
-    .button-secondary:hover { border-color: #b7c1b2; background: var(--white); }
-    .button svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-    .hero-art { position: relative; min-height: 420px; display: grid; place-items: center; }
-    .art-orbit { position: absolute; width: min(100%, 430px); aspect-ratio: 1; border: 1px solid #d9d8cc; border-radius: 50%; transform: rotate(-18deg); }
-    .art-orbit::before, .art-orbit::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid #e2dfd3; inset: 24px; }
-    .art-orbit::after { inset: 47px; border-style: dashed; opacity: .6; }
-    .art-dot { width: 11px; height: 11px; background: var(--gold); border-radius: 50%; position: absolute; top: 13%; right: 17%; box-shadow: 0 0 0 8px rgba(183,154,101,.12); }
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: var(--green-dark);
+      color: white;
+      box-shadow: 0 9px 20px rgba(48, 72, 58, .16);
+    }
+
+    .button-primary:hover {
+      background: #263d30;
+      box-shadow: 0 12px 25px rgba(48, 72, 58, .2);
+    }
+
+    .button-secondary {
+      background: rgba(255, 254, 250, .62);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .button-secondary:hover {
+      border-color: #b7c1b2;
+      background: var(--white);
+    }
+
+    .button svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .hero-art {
+      position: relative;
+      min-height: 420px;
+      display: grid;
+      place-items: center;
+    }
+
+    .art-orbit {
+      position: absolute;
+      width: min(100%, 430px);
+      aspect-ratio: 1;
+      border: 1px solid #d9d8cc;
+      border-radius: 50%;
+      transform: rotate(-18deg);
+    }
+
+    .art-orbit::before,
+    .art-orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid #e2dfd3;
+      inset: 24px;
+    }
+
+    .art-orbit::after {
+      inset: 47px;
+      border-style: dashed;
+      opacity: .6;
+    }
+
+    .art-dot {
+      width: 11px;
+      height: 11px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: absolute;
+      top: 13%;
+      right: 17%;
+      box-shadow: 0 0 0 8px rgba(183, 154, 101, .12);
+    }
+
     .arch-card {
-      z-index: 1; position: relative; width: min(78%, 310px); min-height: 366px; padding: 29px 27px 24px;
-      background: linear-gradient(155deg, #e5e8dd, #d4ddcf); border: 1px solid rgba(83,107,89,.12);
-      border-radius: 160px 160px 22px 22px; box-shadow: 0 25px 70px rgba(48,72,58,.16);
-      display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center;
+      z-index: 1;
+      position: relative;
+      width: min(78%, 310px);
+      min-height: 366px;
+      padding: 29px 27px 24px;
+      background: linear-gradient(155deg, #e5e8dd, #d4ddcf);
+      border: 1px solid rgba(83, 107, 89, .12);
+      border-radius: 160px 160px 22px 22px;
+      box-shadow: 0 25px 70px rgba(48, 72, 58, .16);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
       overflow: hidden;
     }
-    .arch-card::before { content: ""; width: 168px; height: 168px; border: 1px solid rgba(83,107,89,.16); border-radius: 50%; position: absolute; top: 43px; left: calc(50% - 84px); }
-    .arch-card::after { content: ""; width: 110px; height: 110px; border: 1px solid rgba(83,107,89,.13); border-radius: 50%; position: absolute; top: 72px; left: calc(50% - 55px); }
-    .art-top, .art-center, .art-bottom { position: relative; z-index: 2; }
-    .art-top { font-size: 10px; letter-spacing: .2em; color: #526957; text-transform: uppercase; margin-top: 2px; }
-    .art-heart { width: 55px; height: 55px; display: grid; place-items: center; border-radius: 50%; background: rgba(255,254,250,.54); color: var(--rose); margin: 0 auto 9px; box-shadow: 0 4px 25px rgba(255,254,250,.25); }
-    .art-heart svg { width: 23px; height: 23px; }
-    .art-name { font-family: var(--serif); font-size: 47px; letter-spacing: -.04em; color: var(--green-dark); line-height: 1.1; }
-    .art-sub { color: #617266; font-size: 12px; margin-top: 8px; }
-    .art-bottom { border-top: 1px solid rgba(83,107,89,.2); padding-top: 14px; width: 100%; color: #526957; font-size: 11px; letter-spacing: .04em; }
-    .floating-note { position: absolute; z-index: 3; right: -4px; bottom: 46px; padding: 14px 18px; background: var(--white); border: 1px solid rgba(222,222,212,.9); box-shadow: var(--shadow); border-radius: 14px; transform: rotate(3deg); font-family: var(--serif); font-size: 17px; color: var(--green-dark); }
-    .floating-note span { color: var(--rose); }
 
-    .soft-divider { border: 0; border-top: 1px solid var(--line); margin: 0; }
-    .stats-wrap { padding: 15px 0 54px; }
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); background: rgba(255,254,250,.62); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
-    .stat { padding: 19px 22px; display: flex; align-items: center; gap: 13px; min-width: 0; }
-    .stat + .stat { border-left: 1px solid var(--line); }
-    .stat-icon { display: grid; place-items: center; width: 39px; height: 39px; border-radius: 12px; background: var(--sage-light); color: var(--green); flex-shrink: 0; }
-    .stat-icon svg { width: 18px; height: 18px; }
-    .stat-copy { min-width: 0; }
-    .stat-copy strong { display: block; font-family: var(--serif); font-weight: 500; font-size: 25px; line-height: 1.1; letter-spacing: -.02em; }
-    .stat-copy span { color: var(--ink-soft); font-size: 11px; letter-spacing: .035em; }
+    .arch-card::before {
+      content: "";
+      width: 168px;
+      height: 168px;
+      border: 1px solid rgba(83, 107, 89, .16);
+      border-radius: 50%;
+      position: absolute;
+      top: 43px;
+      left: calc(50% - 84px);
+    }
 
-    .section { padding: 46px 0 72px; }
-    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 22px; margin-bottom: 27px; }
-    .section-heading h2 { margin: 11px 0 7px; font-family: var(--serif); font-weight: 500; font-size: clamp(32px, 4vw, 47px); letter-spacing: -.035em; line-height: 1.08; }
-    .section-heading p { color: var(--ink-soft); margin-bottom: 0; max-width: 590px; font-size: 14px; line-height: 1.75; }
-    .section-index { align-self: start; font-family: var(--serif); font-size: 18px; color: var(--gold); }
+    .arch-card::after {
+      content: "";
+      width: 110px;
+      height: 110px;
+      border: 1px solid rgba(83, 107, 89, .13);
+      border-radius: 50%;
+      position: absolute;
+      top: 72px;
+      left: calc(50% - 55px);
+    }
 
-    .workspace-shell { border-radius: var(--radius-xl); border: 1px solid var(--line); background: rgba(255,254,250,.72); box-shadow: var(--shadow); overflow: hidden; }
-    .workspace-top { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px; padding: 26px 28px 23px; border-bottom: 1px solid var(--line); background: rgba(255,254,250,.55); }
-    .workspace-top h3 { margin: 0 0 4px; font-family: var(--serif); font-size: 25px; font-weight: 500; letter-spacing: -.02em; }
-    .workspace-top p { margin: 0; color: var(--ink-soft); font-size: 12px; }
-    .live-label { color: var(--green); background: var(--sage-light); border: 1px solid #dbe2d5; border-radius: 999px; padding: 8px 11px; text-transform: uppercase; font-size: 10px; letter-spacing: .12em; font-weight: 800; white-space: nowrap; }
-    .quiz-setup { display: grid; grid-template-columns: 1.3fr .75fr auto auto; align-items: end; gap: 12px; padding: 21px 28px; border-bottom: 1px solid var(--line); }
-    .field { display: grid; gap: 7px; min-width: 0; }
-    .field label { font-size: 11px; font-weight: 750; letter-spacing: .04em; color: var(--ink-soft); }
-    .field select { width: 100%; min-height: 45px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); color: var(--ink); padding: 10px 35px 10px 13px; outline-offset: 2px; }
-    .quiz-setup .button { min-height: 45px; padding-inline: 15px; white-space: nowrap; }
-    .quiz-area { padding: 28px; min-height: 290px; }
-    .quiz-empty { min-height: 235px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 12px; }
-    .empty-symbol { width: 58px; height: 58px; display: grid; place-items: center; color: var(--green); border-radius: 50%; background: var(--sage-light); margin-bottom: 13px; }
-    .empty-symbol svg { width: 26px; height: 26px; }
-    .quiz-empty h4 { margin: 0 0 7px; font-family: var(--serif); font-size: 26px; font-weight: 500; }
-    .quiz-empty p { color: var(--ink-soft); font-size: 13px; max-width: 400px; margin: 0; }
-    .quiz-topline { display: flex; align-items: center; justify-content: space-between; gap: 14px; color: var(--ink-soft); font-size: 12px; margin-bottom: 12px; }
-    .topic-pill { display: inline-flex; max-width: 65%; color: var(--green-dark); background: var(--sage-light); border-radius: 999px; padding: 6px 10px; font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
-    .progress-track { height: 4px; background: #e8e8df; border-radius: 999px; overflow: hidden; margin-bottom: 28px; }
-    .progress-fill { height: 100%; width: 0; background: var(--green); border-radius: inherit; transition: width .3s ease; }
-    .question-title { font-family: var(--serif); font-weight: 500; font-size: clamp(22px, 3vw, 31px); line-height: 1.25; letter-spacing: -.025em; max-width: 780px; margin: 0 0 22px; }
-    .answer-list { display: grid; gap: 10px; }
-    .answer-option { border: 1px solid var(--line); border-radius: 13px; padding: 13px 15px; display: flex; align-items: flex-start; gap: 12px; width: 100%; text-align: left; background: var(--white); color: var(--ink); transition: border-color .15s ease, background .15s ease, transform .15s ease; }
-    .answer-option:hover:not(:disabled) { transform: translateY(-1px); border-color: #aebda9; }
-    .answer-letter { display: grid; place-items: center; flex: 0 0 26px; width: 26px; height: 26px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink-soft); font-size: 11px; font-weight: 800; }
-    .answer-text { flex: 1; font-size: 13px; line-height: 1.55; padding-top: 2px; }
-    .answer-option.is-correct { border-color: #91ae91; background: #edf5ea; }
-    .answer-option.is-correct .answer-letter { background: #d7e7d3; border-color: #b8d0b5; color: #315d39; }
-    .answer-option.is-wrong { border-color: #d9a9a2; background: #fff0ed; }
-    .answer-option.is-wrong .answer-letter { background: #f7ddda; border-color: #ebc3be; color: #8d4e47; }
-    .answer-option:disabled { cursor: default; }
-    .feedback { display: flex; align-items: flex-start; gap: 10px; padding: 14px 15px; border-radius: 13px; margin-top: 15px; background: var(--sage-light); color: var(--green-dark); font-size: 12px; line-height: 1.65; }
-    .feedback.wrong { background: #fbefeb; color: #784741; }
-    .feedback strong { display: block; margin-bottom: 2px; }
-    .feedback svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; }
-    .quiz-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 24px; padding-top: 19px; border-top: 1px solid var(--line); }
-    .quiz-controls .button { min-height: 43px; padding: 10px 16px; }
-    .button:disabled { opacity: .42; cursor: not-allowed; transform: none; box-shadow: none; }
-    .question-counter { color: var(--ink-soft); font-size: 11px; text-align: center; }
-    .result-screen { max-width: 720px; margin-inline: auto; text-align: center; padding: 6px 0 10px; }
-    .result-ring { width: 112px; height: 112px; border-radius: 50%; margin: 0 auto 17px; display: grid; place-items: center; background: conic-gradient(var(--green) var(--score, 0%), #e4e7df 0); position: relative; }
-    .result-ring::before { content: ""; position: absolute; inset: 7px; border-radius: 50%; background: var(--white); }
-    .result-ring strong { z-index: 1; font-family: var(--serif); font-size: 31px; font-weight: 500; }
-    .result-screen h3 { margin: 0 0 8px; font-family: var(--serif); font-size: 31px; font-weight: 500; }
-    .result-screen > p { margin: 0 auto 18px; color: var(--ink-soft); font-size: 13px; max-width: 470px; }
-    .result-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; margin: 20px 0; }
-    .result-stat { padding: 12px 8px; border-radius: 12px; background: var(--sage-light); }
-    .result-stat strong { display: block; font-size: 20px; font-family: var(--serif); font-weight: 500; }
-    .result-stat span { display: block; font-size: 10px; color: var(--ink-soft); }
-    .result-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
-    .wrong-review { margin-top: 24px; text-align: left; border-top: 1px solid var(--line); padding-top: 20px; }
-    .wrong-review h4 { font-family: var(--serif); font-size: 21px; font-weight: 500; margin: 0 0 10px; }
-    .wrong-item { padding: 12px 0; border-bottom: 1px solid var(--line); }
-    .wrong-item strong { display: block; font-size: 12px; margin-bottom: 4px; }
-    .wrong-item span { font-size: 12px; color: var(--ink-soft); }
+    .art-top,
+    .art-center,
+    .art-bottom {
+      position: relative;
+      z-index: 2;
+    }
 
-    .memory-section { background: #ecefe6; border-top: 1px solid #e2e5db; border-bottom: 1px solid #e2e5db; }
-    .memory-section .section { padding-top: 68px; padding-bottom: 74px; }
-    .memory-head-actions { display: flex; gap: 8px; align-items: center; }
-    .tiny-note { font-size: 11px; color: var(--ink-soft); }
-    .memory-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 15px; }
-    .memory-card { min-width: 0; border: 1px solid #d9ded2; border-radius: 19px; background: rgba(255,254,250,.78); padding: 20px; display: flex; flex-direction: column; min-height: 226px; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
-    .memory-card:hover { transform: translateY(-3px); box-shadow: 0 13px 28px rgba(42,55,44,.07); border-color: #bdc9b8; }
-    .memory-card.known { border-color: #a9bba4; background: #f5f8f1; }
-    .memory-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 9px; }
-    .memory-num { color: #9a9e8f; font-size: 10px; letter-spacing: .12em; }
-    .known-mark { color: var(--green); font-size: 10px; font-weight: 800; white-space: nowrap; }
-    .memory-card h3 { margin: 12px 0 8px; font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.15; letter-spacing: -.02em; }
-    .mnemonic { display: inline-flex; align-self: flex-start; padding: 5px 9px; background: var(--gold-light); color: #665334; border-radius: 7px; font-size: 10px; font-weight: 850; letter-spacing: .1em; }
-    .memory-summary { font-size: 12px; line-height: 1.7; color: var(--ink-soft); margin: 13px 0 16px; }
-    .memory-details { display: none; color: var(--ink); background: #f0f2eb; border-radius: 12px; padding: 13px; margin: 0 0 14px; font-size: 12px; line-height: 1.75; white-space: pre-line; }
-    .memory-card.expanded .memory-details { display: block; }
-    .memory-card-bottom { display: flex; justify-content: space-between; align-items: center; gap: 8px; border-top: 1px solid #e4e5dc; padding-top: 13px; margin-top: auto; }
-    .text-button { padding: 4px 0; border: 0; background: transparent; color: var(--green-dark); font-size: 11px; font-weight: 800; }
-    .text-button:hover { color: var(--rose); }
-    .study-all { display: block; margin: 22px auto 0; }
+    .art-top {
+      font-size: 10px;
+      letter-spacing: .2em;
+      color: #526957;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
 
-    .love-section { padding: 72px 0 83px; }
-    .love-panel { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; border-radius: var(--radius-xl); padding: clamp(26px, 5vw, 54px); background: var(--green-dark); color: #f9f7ef; overflow: hidden; }
-    .love-panel::before { content: ""; position: absolute; width: 400px; height: 400px; border: 1px solid rgba(236,227,206,.16); border-radius: 50%; right: -90px; top: -190px; }
-    .love-panel::after { content: ""; position: absolute; width: 300px; height: 300px; border: 1px solid rgba(236,227,206,.13); border-radius: 50%; right: -38px; top: -139px; }
-    .love-copy, .love-note-card { z-index: 1; position: relative; }
-    .love-panel .eyebrow { color: #d6c69f; }
-    .love-panel h2 { font-family: var(--serif); font-size: clamp(34px, 4.5vw, 53px); font-weight: 400; letter-spacing: -.035em; line-height: 1.08; margin: 15px 0 18px; max-width: 600px; }
-    .love-panel h2 em { color: #d7c49b; }
-    .love-panel p { max-width: 500px; color: rgba(249,247,239,.75); font-size: 13px; line-height: 1.9; margin-bottom: 0; }
-    .love-note-card { border-radius: 18px; background: #f3efe4; color: var(--ink); padding: 25px; transform: rotate(1deg); box-shadow: 0 15px 45px rgba(0,0,0,.12); }
-    .note-label { font-size: 10px; text-transform: uppercase; letter-spacing: .16em; color: #7d846f; font-weight: 800; }
-    .note-message { min-height: 94px; display: flex; align-items: center; font-family: var(--serif); font-size: clamp(21px, 2.5vw, 28px); line-height: 1.3; margin: 15px 0 20px; letter-spacing: -.02em; }
-    .note-sign { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid #dcd9cc; padding-top: 14px; color: #747b6e; font-size: 11px; }
-    .note-sign svg { width: 16px; height: 16px; color: var(--rose); }
-    .note-refresh { border: 0; background: transparent; color: var(--green-dark); font-size: 11px; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+    .art-heart {
+      width: 55px;
+      height: 55px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 254, 250, .54);
+      color: var(--rose);
+      margin: 0 auto 9px;
+      box-shadow: 0 4px 25px rgba(255, 254, 250, .25);
+    }
 
-    .site-footer { border-top: 1px solid var(--line); padding: 22px 0 calc(24px + env(safe-area-inset-bottom)); color: var(--ink-soft); }
-    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; font-size: 11px; }
-    .footer-sign { color: var(--green-dark); display: flex; align-items: center; gap: 7px; }
-    .footer-sign svg { width: 14px; height: 14px; color: var(--rose); }
-    .toast { position: fixed; bottom: max(20px, env(safe-area-inset-bottom)); left: 50%; transform: translate(-50%, 20px); z-index: 40; padding: 12px 17px; border-radius: 999px; background: var(--green-dark); color: #fff; font-size: 12px; box-shadow: var(--shadow); opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; max-width: calc(100% - 28px); text-align: center; }
-    .toast.show { opacity: 1; transform: translate(-50%, 0); }
-    .noscript { margin: 20px; padding: 15px; background: #fff1e9; border-radius: 12px; color: #6d382c; }
+    .art-heart svg {
+      width: 23px;
+      height: 23px;
+    }
+
+    .art-name {
+      font-family: var(--serif);
+      font-size: 47px;
+      letter-spacing: -.04em;
+      color: var(--green-dark);
+      line-height: 1.1;
+    }
+
+    .art-sub {
+      color: #617266;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .art-bottom {
+      border-top: 1px solid rgba(83, 107, 89, .2);
+      padding-top: 14px;
+      width: 100%;
+      color: #526957;
+      font-size: 11px;
+      letter-spacing: .04em;
+    }
+
+    .floating-note {
+      position: absolute;
+      z-index: 3;
+      right: -4px;
+      bottom: 46px;
+      padding: 14px 18px;
+      background: var(--white);
+      border: 1px solid rgba(222, 222, 212, .9);
+      box-shadow: var(--shadow);
+      border-radius: 14px;
+      transform: rotate(3deg);
+      font-family: var(--serif);
+      font-size: 17px;
+      color: var(--green-dark);
+    }
+
+    .floating-note span {
+      color: var(--rose);
+    }
+
+    .soft-divider {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 0;
+    }
+
+    .stats-wrap {
+      padding: 15px 0 54px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: rgba(255, 254, 250, .62);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .stat {
+      padding: 19px 22px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 0;
+    }
+
+    .stat+.stat {
+      border-left: 1px solid var(--line);
+    }
+
+    .stat-icon {
+      display: grid;
+      place-items: center;
+      width: 39px;
+      height: 39px;
+      border-radius: 12px;
+      background: var(--sage-light);
+      color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .stat-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .stat-copy {
+      min-width: 0;
+    }
+
+    .stat-copy strong {
+      display: block;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 25px;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+    }
+
+    .stat-copy span {
+      color: var(--ink-soft);
+      font-size: 11px;
+      letter-spacing: .035em;
+    }
+
+    .section {
+      padding: 46px 0 72px;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 22px;
+      margin-bottom: 27px;
+    }
+
+    .section-heading h2 {
+      margin: 11px 0 7px;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(32px, 4vw, 47px);
+      letter-spacing: -.035em;
+      line-height: 1.08;
+    }
+
+    .section-heading p {
+      color: var(--ink-soft);
+      margin-bottom: 0;
+      max-width: 590px;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .section-index {
+      align-self: start;
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--gold);
+    }
+
+    .workspace-shell {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: rgba(255, 254, 250, .72);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .workspace-top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      padding: 26px 28px 23px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 254, 250, .55);
+    }
+
+    .workspace-top h3 {
+      margin: 0 0 4px;
+      font-family: var(--serif);
+      font-size: 25px;
+      font-weight: 500;
+      letter-spacing: -.02em;
+    }
+
+    .workspace-top p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 12px;
+    }
+
+    .live-label {
+      color: var(--green);
+      background: var(--sage-light);
+      border: 1px solid #dbe2d5;
+      border-radius: 999px;
+      padding: 8px 11px;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: .12em;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .quiz-setup {
+      display: grid;
+      grid-template-columns: 1.3fr .75fr auto auto;
+      align-items: end;
+      gap: 12px;
+      padding: 21px 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .field label {
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .04em;
+      color: var(--ink-soft);
+    }
+
+    .field select {
+      width: 100%;
+      min-height: 45px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--white);
+      color: var(--ink);
+      padding: 10px 35px 10px 13px;
+      outline-offset: 2px;
+    }
+
+    .quiz-setup .button {
+      min-height: 45px;
+      padding-inline: 15px;
+      white-space: nowrap;
+    }
+
+    .quiz-area {
+      padding: 28px;
+      min-height: 290px;
+    }
+
+    .quiz-empty {
+      min-height: 235px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px;
+    }
+
+    .empty-symbol {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      border-radius: 50%;
+      background: var(--sage-light);
+      margin-bottom: 13px;
+    }
+
+    .empty-symbol svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .quiz-empty h4 {
+      margin: 0 0 7px;
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 500;
+    }
+
+    .quiz-empty p {
+      color: var(--ink-soft);
+      font-size: 13px;
+      max-width: 400px;
+      margin: 0;
+    }
+
+    .quiz-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      color: var(--ink-soft);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .topic-pill {
+      display: inline-flex;
+      max-width: 65%;
+      color: var(--green-dark);
+      background: var(--sage-light);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .progress-track {
+      height: 4px;
+      background: #e8e8df;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: var(--green);
+      border-radius: inherit;
+      transition: width .3s ease;
+    }
+
+    .question-title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(22px, 3vw, 31px);
+      line-height: 1.25;
+      letter-spacing: -.025em;
+      max-width: 780px;
+      margin: 0 0 22px;
+    }
+
+    .answer-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .answer-option {
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 13px 15px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+      text-align: left;
+      background: var(--white);
+      color: var(--ink);
+      transition: border-color .15s ease, background .15s ease, transform .15s ease;
+    }
+
+    .answer-option:hover:not(:disabled) {
+      transform: translateY(-1px);
+      border-color: #aebda9;
+    }
+
+    .answer-letter {
+      display: grid;
+      place-items: center;
+      flex: 0 0 26px;
+      width: 26px;
+      height: 26px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink-soft);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .answer-text {
+      flex: 1;
+      font-size: 13px;
+      line-height: 1.55;
+      padding-top: 2px;
+    }
+
+    .answer-option.is-correct {
+      border-color: #91ae91;
+      background: #edf5ea;
+    }
+
+    .answer-option.is-correct .answer-letter {
+      background: #d7e7d3;
+      border-color: #b8d0b5;
+      color: #315d39;
+    }
+
+    .answer-option.is-wrong {
+      border-color: #d9a9a2;
+      background: #fff0ed;
+    }
+
+    .answer-option.is-wrong .answer-letter {
+      background: #f7ddda;
+      border-color: #ebc3be;
+      color: #8d4e47;
+    }
+
+    .answer-option:disabled {
+      cursor: default;
+    }
+
+    .feedback {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 15px;
+      border-radius: 13px;
+      margin-top: 15px;
+      background: var(--sage-light);
+      color: var(--green-dark);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .feedback.wrong {
+      background: #fbefeb;
+      color: #784741;
+    }
+
+    .feedback strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .feedback svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .quiz-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 19px;
+      border-top: 1px solid var(--line);
+    }
+
+    .quiz-controls .button {
+      min-height: 43px;
+      padding: 10px 16px;
+    }
+
+    .button:disabled {
+      opacity: .42;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .question-counter {
+      color: var(--ink-soft);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .result-screen {
+      max-width: 720px;
+      margin-inline: auto;
+      text-align: center;
+      padding: 6px 0 10px;
+    }
+
+    .result-ring {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      margin: 0 auto 17px;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--green) var(--score, 0%), #e4e7df 0);
+      position: relative;
+    }
+
+    .result-ring::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      background: var(--white);
+    }
+
+    .result-ring strong {
+      z-index: 1;
+      font-family: var(--serif);
+      font-size: 31px;
+      font-weight: 500;
+    }
+
+    .result-screen h3 {
+      margin: 0 0 8px;
+      font-family: var(--serif);
+      font-size: 31px;
+      font-weight: 500;
+    }
+
+    .result-screen>p {
+      margin: 0 auto 18px;
+      color: var(--ink-soft);
+      font-size: 13px;
+      max-width: 470px;
+    }
+
+    .result-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin: 20px 0;
+    }
+
+    .result-stat {
+      padding: 12px 8px;
+      border-radius: 12px;
+      background: var(--sage-light);
+    }
+
+    .result-stat strong {
+      display: block;
+      font-size: 20px;
+      font-family: var(--serif);
+      font-weight: 500;
+    }
+
+    .result-stat span {
+      display: block;
+      font-size: 10px;
+      color: var(--ink-soft);
+    }
+
+    .result-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .wrong-review {
+      margin-top: 24px;
+      text-align: left;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+    }
+
+    .wrong-review h4 {
+      font-family: var(--serif);
+      font-size: 21px;
+      font-weight: 500;
+      margin: 0 0 10px;
+    }
+
+    .wrong-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wrong-item strong {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .wrong-item span {
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+
+    .memory-section {
+      background: #ecefe6;
+      border-top: 1px solid #e2e5db;
+      border-bottom: 1px solid #e2e5db;
+    }
+
+    .memory-section .section {
+      padding-top: 68px;
+      padding-bottom: 74px;
+    }
+
+    .memory-head-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .tiny-note {
+      font-size: 11px;
+      color: var(--ink-soft);
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .memory-card {
+      min-width: 0;
+      border: 1px solid #d9ded2;
+      border-radius: 19px;
+      background: rgba(255, 254, 250, .78);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      min-height: 226px;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+
+    .memory-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 13px 28px rgba(42, 55, 44, .07);
+      border-color: #bdc9b8;
+    }
+
+    .memory-card.known {
+      border-color: #a9bba4;
+      background: #f5f8f1;
+    }
+
+    .memory-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 9px;
+    }
+
+    .memory-num {
+      color: #9a9e8f;
+      font-size: 10px;
+      letter-spacing: .12em;
+    }
+
+    .known-mark {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .memory-card h3 {
+      margin: 12px 0 8px;
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+    }
+
+    .mnemonic {
+      display: inline-flex;
+      align-self: flex-start;
+      padding: 5px 9px;
+      background: var(--gold-light);
+      color: #665334;
+      border-radius: 7px;
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: .1em;
+    }
+
+    .memory-summary {
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      margin: 13px 0 16px;
+    }
+
+    .memory-details {
+      display: none;
+      color: var(--ink);
+      background: #f0f2eb;
+      border-radius: 12px;
+      padding: 13px;
+      margin: 0 0 14px;
+      font-size: 12px;
+      line-height: 1.75;
+      white-space: pre-line;
+    }
+
+    .memory-card.expanded .memory-details {
+      display: block;
+    }
+
+    .memory-card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      border-top: 1px solid #e4e5dc;
+      padding-top: 13px;
+      margin-top: auto;
+    }
+
+    .text-button {
+      padding: 4px 0;
+      border: 0;
+      background: transparent;
+      color: var(--green-dark);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .text-button:hover {
+      color: var(--rose);
+    }
+
+    .study-all {
+      display: block;
+      margin: 22px auto 0;
+    }
+
+    .love-section {
+      padding: 72px 0 83px;
+    }
+
+    .love-panel {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 40px;
+      align-items: center;
+      border-radius: var(--radius-xl);
+      padding: clamp(26px, 5vw, 54px);
+      background: var(--green-dark);
+      color: #f9f7ef;
+      overflow: hidden;
+    }
+
+    .love-panel::before {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border: 1px solid rgba(236, 227, 206, .16);
+      border-radius: 50%;
+      right: -90px;
+      top: -190px;
+    }
+
+    .love-panel::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border: 1px solid rgba(236, 227, 206, .13);
+      border-radius: 50%;
+      right: -38px;
+      top: -139px;
+    }
+
+    .love-copy,
+    .love-note-card {
+      z-index: 1;
+      position: relative;
+    }
+
+    .love-panel .eyebrow {
+      color: #d6c69f;
+    }
+
+    .love-panel h2 {
+      font-family: var(--serif);
+      font-size: clamp(34px, 4.5vw, 53px);
+      font-weight: 400;
+      letter-spacing: -.035em;
+      line-height: 1.08;
+      margin: 15px 0 18px;
+      max-width: 600px;
+    }
+
+    .love-panel h2 em {
+      color: #d7c49b;
+    }
+
+    .love-panel p {
+      max-width: 500px;
+      color: rgba(249, 247, 239, .75);
+      font-size: 13px;
+      line-height: 1.9;
+      margin-bottom: 0;
+    }
+
+    .love-note-card {
+      border-radius: 18px;
+      background: #f3efe4;
+      color: var(--ink);
+      padding: 25px;
+      transform: rotate(1deg);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, .12);
+    }
+
+    .note-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: #7d846f;
+      font-weight: 800;
+    }
+
+    .note-message {
+      min-height: 94px;
+      display: flex;
+      align-items: center;
+      font-family: var(--serif);
+      font-size: clamp(21px, 2.5vw, 28px);
+      line-height: 1.3;
+      margin: 15px 0 20px;
+      letter-spacing: -.02em;
+    }
+
+    .note-sign {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px solid #dcd9cc;
+      padding-top: 14px;
+      color: #747b6e;
+      font-size: 11px;
+    }
+
+    .note-sign svg {
+      width: 16px;
+      height: 16px;
+      color: var(--rose);
+    }
+
+    .note-refresh {
+      border: 0;
+      background: transparent;
+      color: var(--green-dark);
+      font-size: 11px;
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 calc(24px + env(safe-area-inset-bottom));
+      color: var(--ink-soft);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 11px;
+    }
+
+    .footer-sign {
+      color: var(--green-dark);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .footer-sign svg {
+      width: 14px;
+      height: 14px;
+      color: var(--rose);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: max(20px, env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translate(-50%, 20px);
+      z-index: 40;
+      padding: 12px 17px;
+      border-radius: 999px;
+      background: var(--green-dark);
+      color: #fff;
+      font-size: 12px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+      max-width: calc(100% - 28px);
+      text-align: center;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .noscript {
+      margin: 20px;
+      padding: 15px;
+      background: #fff1e9;
+      border-radius: 12px;
+      color: #6d382c;
+    }
 
     @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: minmax(0,1fr) minmax(270px,.75fr); gap: 22px; }
-      .hero-art { min-height: 365px; }
-      .arch-card { min-height: 330px; }
-      .quiz-setup { grid-template-columns: 1fr 1fr; }
-      .memory-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .love-panel { gap: 26px; }
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(270px, .75fr);
+        gap: 22px;
+      }
+
+      .hero-art {
+        min-height: 365px;
+      }
+
+      .arch-card {
+        min-height: 330px;
+      }
+
+      .quiz-setup {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .memory-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .love-panel {
+        gap: 26px;
+      }
     }
+
     @media (max-width: 650px) {
-      html { scroll-padding-top: 78px; }
-      .container { width: min(100% - 30px, 560px); }
-      .header-inner { min-height: 68px; gap: 10px; }
-      .brand { gap: 9px; }
-      .brand-mark { width: 37px; height: 37px; flex-basis: 37px; }
-      .brand-copy strong { font-size: 10px; letter-spacing: .15em; }
-      .brand-copy span { font-size: 10px; }
-      .nav { gap: 12px; font-size: 11px; }
-      .nav a:not(.nav-love) { display: none; }
-      .nav-love { padding: 9px 11px; font-size: 10px; }
-      .hero { padding: 35px 0 22px; }
-      .hero-grid { grid-template-columns: 1fr; gap: 15px; }
-      .hero h1 { font-size: clamp(43px, 12vw, 62px); margin-top: 15px; }
-      .hero-lead { font-size: 14px; line-height: 1.78; margin-bottom: 16px; }
-      .love-line { font-size: 12px; margin-bottom: 22px; }
-      .hero-actions { display: grid; grid-template-columns: 1fr 1fr; }
-      .hero-actions .button { padding-inline: 12px; font-size: 12px; min-height: 46px; }
-      .hero-art { min-height: 305px; margin-top: 2px; }
-      .art-orbit { width: 290px; max-width: 90%; }
-      .arch-card { width: 220px; min-height: 282px; padding: 22px 19px 18px; }
-      .arch-card::before { width: 140px; height: 140px; left: calc(50% - 70px); top: 38px; }
-      .arch-card::after { width: 95px; height: 95px; left: calc(50% - 47px); top: 61px; }
-      .art-heart { width: 43px; height: 43px; margin-bottom: 7px; }
-      .art-name { font-size: 40px; }
-      .art-sub { font-size: 11px; }
-      .floating-note { right: calc(50% - 142px); bottom: 12px; font-size: 14px; padding: 11px 13px; }
-      .stats-wrap { padding: 10px 0 35px; }
-      .stats { border-radius: 14px; }
-      .stat { padding: 13px 9px; display: block; text-align: center; }
-      .stat-icon { width: 31px; height: 31px; margin: 0 auto 7px; border-radius: 10px; }
-      .stat-icon svg { width: 15px; height: 15px; }
-      .stat-copy strong { font-size: 22px; }
-      .stat-copy span { font-size: 9px; line-height: 1.3; display: block; }
-      .section { padding: 35px 0 50px; }
-      .section-heading { align-items: start; margin-bottom: 20px; gap: 10px; }
-      .section-heading h2 { font-size: 35px; }
-      .section-heading p { font-size: 12px; }
-      .section-index { font-size: 14px; }
-      .workspace-shell { border-radius: 20px; }
-      .workspace-top { padding: 20px 17px 17px; gap: 10px; grid-template-columns: 1fr; }
-      .workspace-top h3 { font-size: 23px; }
-      .live-label { justify-self: start; font-size: 9px; }
-      .quiz-setup { padding: 16px 17px; grid-template-columns: 1fr 1fr; gap: 11px; }
-      .field label { font-size: 10px; }
-      .field select { min-height: 44px; padding-left: 10px; font-size: 12px; }
-      .quiz-setup .button { grid-column: span 1; width: 100%; padding-inline: 8px; font-size: 11px; }
-      .quiz-area { padding: 19px 16px; min-height: 270px; }
-      .quiz-empty { min-height: 225px; }
-      .quiz-empty h4 { font-size: 24px; }
-      .quiz-empty p { font-size: 12px; }
-      .quiz-topline { font-size: 10px; }
-      .topic-pill { max-width: 70%; font-size: 9px; }
-      .progress-track { margin-bottom: 22px; }
-      .question-title { font-size: 24px; margin-bottom: 18px; }
-      .answer-option { padding: 11px; gap: 9px; border-radius: 12px; }
-      .answer-letter { width: 24px; height: 24px; flex-basis: 24px; }
-      .answer-text { font-size: 12px; }
-      .feedback { font-size: 11px; padding: 12px; }
-      .quiz-controls { margin-top: 18px; padding-top: 15px; gap: 7px; }
-      .quiz-controls .button { min-height: 40px; padding: 9px 11px; font-size: 11px; }
-      .question-counter { font-size: 10px; }
-      .result-ring { width: 96px; height: 96px; }
-      .result-ring strong { font-size: 27px; }
-      .result-screen h3 { font-size: 28px; }
-      .result-stats { gap: 6px; }
-      .result-stat span { font-size: 9px; }
-      .memory-section .section { padding: 46px 0 52px; }
-      .memory-grid { grid-template-columns: 1fr; gap: 11px; }
-      .memory-card { min-height: unset; padding: 17px; border-radius: 16px; }
-      .memory-card h3 { font-size: 21px; }
-      .memory-summary { margin-bottom: 12px; }
-      .memory-card-bottom { padding-top: 10px; }
-      .love-section { padding: 48px 0 54px; }
-      .love-panel { grid-template-columns: 1fr; gap: 24px; border-radius: 23px; padding: 27px 21px; }
-      .love-panel h2 { font-size: 38px; }
-      .love-panel p { font-size: 12px; }
-      .love-note-card { padding: 20px; transform: rotate(.5deg); }
-      .note-message { min-height: 84px; font-size: 24px; }
-      .footer-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
+      html {
+        scroll-padding-top: 78px;
+      }
+
+      .container {
+        width: min(100% - 30px, 560px);
+      }
+
+      .header-inner {
+        min-height: 68px;
+        gap: 10px;
+      }
+
+      .brand {
+        gap: 9px;
+      }
+
+      .brand-mark {
+        width: 37px;
+        height: 37px;
+        flex-basis: 37px;
+      }
+
+      .brand-copy strong {
+        font-size: 10px;
+        letter-spacing: .15em;
+      }
+
+      .brand-copy span {
+        font-size: 10px;
+      }
+
+      .nav {
+        gap: 12px;
+        font-size: 11px;
+      }
+
+      .nav a:not(.nav-love) {
+        display: none;
+      }
+
+      .nav-love {
+        padding: 9px 11px;
+        font-size: 10px;
+      }
+
+      .hero {
+        padding: 35px 0 22px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .hero h1 {
+        font-size: clamp(43px, 12vw, 62px);
+        margin-top: 15px;
+      }
+
+      .hero-lead {
+        font-size: 14px;
+        line-height: 1.78;
+        margin-bottom: 16px;
+      }
+
+      .love-line {
+        font-size: 12px;
+        margin-bottom: 22px;
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-actions .button {
+        padding-inline: 12px;
+        font-size: 12px;
+        min-height: 46px;
+      }
+
+      .hero-art {
+        min-height: 305px;
+        margin-top: 2px;
+      }
+
+      .art-orbit {
+        width: 290px;
+        max-width: 90%;
+      }
+
+      .arch-card {
+        width: 220px;
+        min-height: 282px;
+        padding: 22px 19px 18px;
+      }
+
+      .arch-card::before {
+        width: 140px;
+        height: 140px;
+        left: calc(50% - 70px);
+        top: 38px;
+      }
+
+      .arch-card::after {
+        width: 95px;
+        height: 95px;
+        left: calc(50% - 47px);
+        top: 61px;
+      }
+
+      .art-heart {
+        width: 43px;
+        height: 43px;
+        margin-bottom: 7px;
+      }
+
+      .art-name {
+        font-size: 40px;
+      }
+
+      .art-sub {
+        font-size: 11px;
+      }
+
+      .floating-note {
+        right: calc(50% - 142px);
+        bottom: 12px;
+        font-size: 14px;
+        padding: 11px 13px;
+      }
+
+      .stats-wrap {
+        padding: 10px 0 35px;
+      }
+
+      .stats {
+        border-radius: 14px;
+      }
+
+      .stat {
+        padding: 13px 9px;
+        display: block;
+        text-align: center;
+      }
+
+      .stat-icon {
+        width: 31px;
+        height: 31px;
+        margin: 0 auto 7px;
+        border-radius: 10px;
+      }
+
+      .stat-icon svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      .stat-copy strong {
+        font-size: 22px;
+      }
+
+      .stat-copy span {
+        font-size: 9px;
+        line-height: 1.3;
+        display: block;
+      }
+
+      .section {
+        padding: 35px 0 50px;
+      }
+
+      .section-heading {
+        align-items: start;
+        margin-bottom: 20px;
+        gap: 10px;
+      }
+
+      .section-heading h2 {
+        font-size: 35px;
+      }
+
+      .section-heading p {
+        font-size: 12px;
+      }
+
+      .section-index {
+        font-size: 14px;
+      }
+
+      .workspace-shell {
+        border-radius: 20px;
+      }
+
+      .workspace-top {
+        padding: 20px 17px 17px;
+        gap: 10px;
+        grid-template-columns: 1fr;
+      }
+
+      .workspace-top h3 {
+        font-size: 23px;
+      }
+
+      .live-label {
+        justify-self: start;
+        font-size: 9px;
+      }
+
+      .quiz-setup {
+        padding: 16px 17px;
+        grid-template-columns: 1fr 1fr;
+        gap: 11px;
+      }
+
+      .field label {
+        font-size: 10px;
+      }
+
+      .field select {
+        min-height: 44px;
+        padding-left: 10px;
+        font-size: 12px;
+      }
+
+      .quiz-setup .button {
+        grid-column: span 1;
+        width: 100%;
+        padding-inline: 8px;
+        font-size: 11px;
+      }
+
+      .quiz-area {
+        padding: 19px 16px;
+        min-height: 270px;
+      }
+
+      .quiz-empty {
+        min-height: 225px;
+      }
+
+      .quiz-empty h4 {
+        font-size: 24px;
+      }
+
+      .quiz-empty p {
+        font-size: 12px;
+      }
+
+      .quiz-topline {
+        font-size: 10px;
+      }
+
+      .topic-pill {
+        max-width: 70%;
+        font-size: 9px;
+      }
+
+      .progress-track {
+        margin-bottom: 22px;
+      }
+
+      .question-title {
+        font-size: 24px;
+        margin-bottom: 18px;
+      }
+
+      .answer-option {
+        padding: 11px;
+        gap: 9px;
+        border-radius: 12px;
+      }
+
+      .answer-letter {
+        width: 24px;
+        height: 24px;
+        flex-basis: 24px;
+      }
+
+      .answer-text {
+        font-size: 12px;
+      }
+
+      .feedback {
+        font-size: 11px;
+        padding: 12px;
+      }
+
+      .quiz-controls {
+        margin-top: 18px;
+        padding-top: 15px;
+        gap: 7px;
+      }
+
+      .quiz-controls .button {
+        min-height: 40px;
+        padding: 9px 11px;
+        font-size: 11px;
+      }
+
+      .question-counter {
+        font-size: 10px;
+      }
+
+      .result-ring {
+        width: 96px;
+        height: 96px;
+      }
+
+      .result-ring strong {
+        font-size: 27px;
+      }
+
+      .result-screen h3 {
+        font-size: 28px;
+      }
+
+      .result-stats {
+        gap: 6px;
+      }
+
+      .result-stat span {
+        font-size: 9px;
+      }
+
+      .memory-section .section {
+        padding: 46px 0 52px;
+      }
+
+      .memory-grid {
+        grid-template-columns: 1fr;
+        gap: 11px;
+      }
+
+      .memory-card {
+        min-height: unset;
+        padding: 17px;
+        border-radius: 16px;
+      }
+
+      .memory-card h3 {
+        font-size: 21px;
+      }
+
+      .memory-summary {
+        margin-bottom: 12px;
+      }
+
+      .memory-card-bottom {
+        padding-top: 10px;
+      }
+
+      .love-section {
+        padding: 48px 0 54px;
+      }
+
+      .love-panel {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        border-radius: 23px;
+        padding: 27px 21px;
+      }
+
+      .love-panel h2 {
+        font-size: 38px;
+      }
+
+      .love-panel p {
+        font-size: 12px;
+      }
+
+      .love-note-card {
+        padding: 20px;
+        transform: rotate(.5deg);
+      }
+
+      .note-message {
+        min-height: 84px;
+        font-size: 24px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
     }
+
     @media (max-width: 365px) {
-      .container { width: calc(100% - 24px); }
-      .brand-copy span { display: none; }
-      .hero-actions { grid-template-columns: 1fr; }
-      .quiz-setup { grid-template-columns: 1fr; }
-      .quiz-setup .button { grid-column: auto; }
-      .stat { padding-inline: 5px; }
-      .stat-copy span { font-size: 8px; }
+      .container {
+        width: calc(100% - 24px);
+      }
+
+      .brand-copy span {
+        display: none;
+      }
+
+      .hero-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-setup {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-setup .button {
+        grid-column: auto;
+      }
+
+      .stat {
+        padding-inline: 5px;
+      }
+
+      .stat-copy span {
+        font-size: 8px;
+      }
     }
+
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
     }
   </style>
 </head>
+
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#baslangic" aria-label="Nur'a özel tarih defteri, ana sayfa">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
         </span>
         <span class="brand-copy"><strong>NUR'UMA ÖZEL</strong><span> </span></span>
       </a>
       <nav class="nav" aria-label="Ana menü">
         <a href="#sinav">Test alanı</a>
         <a href="#kodlar">Ezber kodları</a>
-        <a class="nav-love" href="#sana-ozel">Nur, seni çok seviyorum  ♡</a>
+        <a class="nav-love" href="#sana-ozel">Nur, seni çok seviyorum ♡</a>
       </nav>
     </div>
   </header>
@@ -362,12 +1785,23 @@
           <h1>Her şeyden<br />daha değerlisin<br /><em>Nur.</em></h1>
           <p class="hero-lead">Aşkım zaten hemen hepsini ezberliyon çok zekisin bunlarıda yaparsın</p>
           <p class="love-line">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-           
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+              <path d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
           </p>
           <div class="hero-actions">
-            <button class="button button-primary" id="heroStart" type="button">Teste başlayalım <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <a class="button button-secondary" href="#kodlar">Ezber kodlarını gör <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14m-6-6 6 6 6-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <button class="button button-primary" id="heroStart" type="button">Teste başlayalım <svg viewBox="0 0 24 24"
+                fill="none" aria-hidden="true">
+                <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></button>
+            <a class="button button-secondary" href="#kodlar">Ezber kodlarını gör <svg viewBox="0 0 24 24" fill="none"
+                aria-hidden="true">
+                <path d="M12 5v14m-6-6 6 6 6-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></a>
           </div>
         </div>
         <div class="hero-art" aria-label="Nur için hazırlanmış özel çalışma kartı">
@@ -375,31 +1809,46 @@
           <div class="arch-card">
             <div class="art-top">çoook güzelsin</div>
             <div class="art-center">
-              <div class="art-heart" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="art-heart" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z"
+                    stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg></div>
               <div class="art-name">Nur</div>
               <div class="art-sub">Çok akıllısın aşkım</div>
             </div>
-            
+
           </div>
           <div class="floating-note">Çok zekiisin aşkım<span>♡</span></div>
         </div>
       </div>
     </section>
 
-    <div class="container"><hr class="soft-divider" /></div>
+    <div class="container">
+      <hr class="soft-divider" />
+    </div>
 
     <section class="stats-wrap" aria-label="Çalışma istatistikleri">
       <div class="container stats">
         <div class="stat">
-          <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8 4h8M9 3h6v3H9zM6 5H4v16h16V5h-2M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
+              <path d="M8 4h8M9 3h6v3H9zM6 5H4v16h16V5h-2M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg></span>
           <span class="stat-copy"><strong id="statSolved">0</strong><span>Çözülen soru</span></span>
         </div>
         <div class="stat">
-          <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
+          <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
+              <path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"
+                stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" />
+            </svg></span>
           <span class="stat-copy"><strong id="statBest">—</strong><span>En iyi başarı</span></span>
         </div>
         <div class="stat">
-          <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5ZM4 6h13m-7 0v5l2-1.3L14 11V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5ZM4 6h13m-7 0v5l2-1.3L14 11V6"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></span>
           <span class="stat-copy"><strong id="statKnown">0</strong><span>Öğrenilen kod</span></span>
         </div>
       </div>
@@ -408,24 +1857,44 @@
     <section class="section" id="sinav">
       <div class="container">
         <div class="section-heading">
-          <div><span class="eyebrow">01 / Kendini dene</span><h2>Bugünün çalışma alanı</h2><p>Konunu seç, soru sayısını belirle ve başlayalım. Her cevabın ardından açıklamayı görebilir, yanlışlarını daha sonra yeniden çözebilirsin.</p></div>
+          <div><span class="eyebrow">01 / Kendini dene</span>
+            <h2>Bugünün çalışma alanı</h2>
+            <p>Konunu seç, soru sayısını belirle ve başlayalım. Her cevabın ardından açıklamayı görebilir, yanlışlarını
+              daha sonra yeniden çözebilirsin.</p>
+          </div>
           <span class="section-index">✳</span>
         </div>
         <div class="workspace-shell">
           <div class="workspace-top">
-            <div><h3>Test.</p></div>
+            <div>
+              <h3>Test.</p>
+            </div>
             <span class="live-label">Nur'un çalışma masası</span>
           </div>
           <div class="quiz-setup">
-            <div class="field"><label for="topicFilter">KONU SEÇİMİ</label><select id="topicFilter"><option value="all">Tüm konular</option></select></div>
-            <div class="field"><label for="questionCount">SORU SAYISI</label><select id="questionCount"><option value="10">10 soru</option><option value="20">20 soru</option><option value="all">Tüm sorular</option></select></div>
-            <button class="button button-primary" id="startQuiz" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 10 7-10 7V5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> Teste başla</button>
-            <button class="button button-secondary" id="wrongOnly" type="button" title="Daha önce yanlış yaptığın sorular">Yanlışlarım</button>
+            <div class="field"><label for="topicFilter">KONU SEÇİMİ</label><select id="topicFilter">
+                <option value="all">Tüm konular</option>
+              </select></div>
+            <div class="field"><label for="questionCount">SORU SAYISI</label><select id="questionCount">
+                <option value="10">10 soru</option>
+                <option value="20">20 soru</option>
+                <option value="all">Tüm sorular</option>
+              </select></div>
+            <button class="button button-primary" id="startQuiz" type="button"><svg viewBox="0 0 24 24" fill="none"
+                aria-hidden="true">
+                <path d="m9 5 10 7-10 7V5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+              </svg> Teste başla</button>
+            <button class="button button-secondary" id="wrongOnly" type="button"
+              title="Daha önce yanlış yaptığın sorular">Yanlışlarım</button>
           </div>
           <div class="quiz-area" id="quizArea" aria-live="polite">
             <div class="quiz-empty">
-              <span class="empty-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H20v17H7.5A2.5 2.5 0 0 0 5 21.5v-17ZM5 5h12m-8 0v5l2-1.4L13 10V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              <h4>Hazır mısın aşkım.</h4><p></p>
+              <span class="empty-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
+                  <path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H20v17H7.5A2.5 2.5 0 0 0 5 21.5v-17ZM5 5h12m-8 0v5l2-1.4L13 10V5"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg></span>
+              <h4>Hazır mısın aşkım.</h4>
+              <p></p>
             </div>
           </div>
         </div>
@@ -435,7 +1904,11 @@
     <section class="memory-section" id="kodlar">
       <div class="container section">
         <div class="section-heading">
-          <div><span class="eyebrow">02 / Hatırla ve pekiştir</span><h2>Ezber kodları kütüphanesi</h2><p>Notlarındaki kodlar tek yerde. Bir kartı açıp bilgileri tekrar et; öğrendiğinde kendin için işaretle. İşaretlerin bu cihazda saklanır.</p></div>
+          <div><span class="eyebrow">02 / Hatırla ve pekiştir</span>
+            <h2>Ezber kodları kütüphanesi</h2>
+            <p>Notlarındaki kodlar tek yerde. Bir kartı açıp bilgileri tekrar et; öğrendiğinde kendin için işaretle.
+              İşaretlerin bu cihazda saklanır.</p>
+          </div>
           <span class="section-index">14 kart</span>
         </div>
         <div class="memory-grid" id="memoryGrid"></div>
@@ -449,12 +1922,17 @@
           <div class="love-copy">
             <span class="eyebrow">Küçük bir hatırlatma</span>
             <h2>Nur, Seniiiiiii<br /><em>çok seviyoruuum.</em></h2>
-            
+
           </div>
           <div class="love-note-card">
             <div class="note-label">Nur</div>
             <div class="note-message" id="noteMessage">İyiki varsın aşkım.</div>
-            <div class="note-sign"><span>Sevgiyle, hep senin tarafında</span><button class="note-refresh" id="newNote" type="button">Bir not daha ↗</button><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="note-sign"><span>Sevgiyle, hep senin tarafında</span><button class="note-refresh" id="newNote"
+                type="button">Bir not daha ↗</button><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z"
+                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg></div>
           </div>
         </div>
       </div>
@@ -464,11 +1942,16 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <span>Nur'a özel hazırlandı </span>
-      <span class="footer-sign">Nur, seni seviyorum <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="footer-sign">Nur, seni seviyorum <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg></span>
     </div>
   </footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <noscript><p class="noscript">Test ve kart özelliklerini kullanabilmek için tarayıcında JavaScript açık olmalı.</p></noscript>
+  <noscript>
+    <p class="noscript">Test ve kart özelliklerini kullanabilmek için tarayıcında JavaScript açık olmalı.</p>
+  </noscript>
 
   <script>
     // Nur'a özel KPSS tarih çalışma alanı. Harici kütüphane veya sunucu gerekmez.
@@ -564,42 +2047,132 @@
     ];
 
     const questions = [
-      { id:'q01', topic:'fronts', prompt:'Mustafa Kemal’in I. Dünya Savaşı’nda görev aldığı cepheler hangi seçenekte doğru verilmiştir?', options:['Çanakkale, Kafkas ve Suriye','Yemen, Hicaz ve Galiçya','Kanal, Irak ve Romanya','Trablusgarp, Balkan ve Kırım'], answer:'Çanakkale, Kafkas ve Suriye', explain:'Mustafa Kemal, I. Dünya Savaşı sırasında Çanakkale, Kafkas ve Suriye cephelerinde görev yapmıştır.' },
-      { id:'q02', topic:'fronts', prompt:'Mustafa Kemal’in I. Dünya Savaşı’nda görev yaptığı doğu cephesi hangisidir?', options:['Kafkas Cephesi','Kanal Cephesi','Hicaz Cephesi','Galiçya Cephesi'], answer:'Kafkas Cephesi', explain:'Mustafa Kemal, Kafkas Cephesi’nde Rus kuvvetlerine karşı görev yapmıştır.' },
-      { id:'q03', topic:'vilayet', prompt:'Vilayet-i Sitte aşağıdaki illerin hangisinden oluşur?', options:['Bitlis, Erzurum, Sivas, Van, Elazığ, Diyarbakır','Samsun, Amasya, Çorum, Tokat, Yozgat, Ordu','Edirne, Selanik, Manastır, Üsküp, Kosova, Yanya','Ankara, Konya, Kayseri, Sivas, Yozgat, Niğde'], answer:'Bitlis, Erzurum, Sivas, Van, Elazığ, Diyarbakır', explain:'Vilayet-i Sitte; Bitlis, Erzurum, Sivas, Van, Elazığ ve Diyarbakır vilayetlerini ifade eder.' },
-      { id:'q04', topic:'vilayet', prompt:'Aşağıdaki illerden hangisi Vilayet-i Sitte içinde yer almaz?', options:['Samsun','Bitlis','Erzurum','Van'], answer:'Samsun', explain:'Vilayet-i Sitte içinde Bitlis, Erzurum, Sivas, Van, Elazığ ve Diyarbakır bulunur; Samsun bu grupta yer almaz.' },
-      { id:'q05', topic:'opec', prompt:'OPEC’in 1960 yılında kurucu üyeleri arasında yer alan ülkeler hangileridir?', options:['Venezuela, İran, Suudi Arabistan, Kuveyt, Irak','Türkiye, İran, Mısır, Irak, Suriye','Venezuela, Brezilya, Meksika, Kuveyt, Irak','İran, Katar, BAE, Bahreyn, Suudi Arabistan'], answer:'Venezuela, İran, Suudi Arabistan, Kuveyt, Irak', explain:'OPEC’in beş kurucu üyesi Venezuela, İran, Suudi Arabistan, Kuveyt ve Irak’tır.' },
-      { id:'q06', topic:'opec', prompt:'OPEC hangi yıl kurulmuştur?', options:['1923','1945','1960','1973'], answer:'1960', explain:'OPEC, 1960 yılında Bağdat Konferansı sırasında kuruldu.' },
-      { id:'q07', topic:'gerileme', prompt:'Lale Devri hangi Osmanlı padişahının döneminde yaşanmıştır?', options:['III. Ahmet','I. Mahmut','II. Mahmut','IV. Murat'], answer:'III. Ahmet', explain:'Lale Devri, III. Ahmet döneminde yaşanmıştır.' },
-      { id:'q08', topic:'gerileme', prompt:'Nizam-ı Cedid yeniliklerini başlatan Osmanlı padişahı kimdir?', options:['III. Selim','I. Mahmut','III. Ahmet','I. Abdülhamit'], answer:'III. Selim', explain:'Nizam-ı Cedid yenilikleri III. Selim döneminde başlatılmıştır.' },
-      { id:'q09', topic:'balkan', prompt:'I. Balkan Savaşı sonrasında Osmanlı Devleti’nin kaybettiği yerler aşağıdakilerden hangisinde birlikte verilmiştir?', options:['Trakya, Ege adaları, Makedonya, Arnavutluk, Selanik','Kars, Ardahan, Batum, Artvin, Sarıkamış','Musul, Kerkük, Halep, Şam, Beyrut','Kıbrıs, Girit, Rodos, On İki Ada, Malta'], answer:'Trakya, Ege adaları, Makedonya, Arnavutluk, Selanik', explain:'Notlarında I. Balkan Savaşı sonrasında kaybedilen yerler arasında Trakya, Ege adaları, Makedonya, Arnavutluk ve Selanik yer alıyor.' },
-      { id:'q10', topic:'balkan', prompt:'I. Balkan Savaşı sırasında bağımsızlığını ilan ederek Osmanlı Devleti’nden ayrılan devlet hangisidir?', options:['Arnavutluk','Romanya','Yunanistan','Sırbistan'], answer:'Arnavutluk', explain:'Arnavutluk, 1912’de bağımsızlığını ilan etti.' },
-      { id:'q11', topic:'yesilirmak', prompt:'Yeşilırmak Havzası Projesi kapsamındaki iller hangileridir?', options:['Samsun, Amasya, Çorum, Tokat','Adana, Mersin, Hatay, Osmaniye','Diyarbakır, Batman, Siirt, Şırnak','İzmir, Manisa, Aydın, Denizli'], answer:'Samsun, Amasya, Çorum, Tokat', explain:'Yeşilırmak Havzası Projesi Samsun, Amasya, Çorum ve Tokat illerini kapsar.' },
-      { id:'q12', topic:'yesilirmak', prompt:'Aşağıdaki illerden hangisi Yeşilırmak Havzası Projesi kapsamındadır?', options:['Amasya','Adana','Diyarbakır','İzmir'], answer:'Amasya', explain:'Amasya, Samsun, Çorum ve Tokat ile birlikte proje kapsamındadır.' },
-      { id:'q13', topic:'inonu', prompt:'I. İnönü Muharebesi’nin ardından TBMM Hükûmeti hangi konferansa davet edilmiştir?', options:['Londra Konferansı','Lozan Konferansı','Paris Barış Konferansı','Berlin Konferansı'], answer:'Londra Konferansı', explain:'I. İnönü Muharebesi’nden sonra TBMM Hükûmeti Londra Konferansı’na davet edildi.' },
-      { id:'q14', topic:'inonu', prompt:'I. İnönü Muharebesi sonrasında TBMM Hükûmeti ile dostluk antlaşması imzalayan ülke hangisidir?', options:['Afganistan','İtalya','Yunanistan','Bulgaristan'], answer:'Afganistan', explain:'TBMM Hükûmeti ile Afganistan arasında 1921’de dostluk antlaşması imzalandı.' },
-      { id:'q15', topic:'inonu', prompt:'Türkiye’nin 1921 Anayasası aşağıdaki adlardan hangisiyle bilinir?', options:['Teşkilât-ı Esasiye Kanunu','Kanun-ı Esasi','Sened-i İttifak','Tanzimat Fermanı'], answer:'Teşkilât-ı Esasiye Kanunu', explain:'1921 Anayasası, Teşkilât-ı Esasiye Kanunu adıyla kabul edilmiştir.' },
-      { id:'q16', topic:'ikinci-mesrutiyet', prompt:'II. Meşrutiyet döneminde İttihat ve Terakki yönetiminde öne çıkan isimlerden biri kimdir?', options:['Talat Paşa','Namık Kemal','Ziya Paşa','Ali Suavi'], answer:'Talat Paşa', explain:'Talat Paşa, II. Meşrutiyet döneminde İttihat ve Terakki’nin önde gelen isimlerindendir.' },
-      { id:'q17', topic:'ikinci-mesrutiyet', prompt:'Aşağıdakilerden hangisi II. Meşrutiyet dönemiyle ilişkilendirilen isimlerden biridir?', options:['Abdullah Cevdet','Ziya Paşa','Namık Kemal','Mustafa Fazıl Paşa'], answer:'Abdullah Cevdet', explain:'Abdullah Cevdet, II. Meşrutiyet dönemindeki fikir ve siyaset çevreleriyle ilişkilidir.' },
-      { id:'q18', topic:'birinci-mesrutiyet', prompt:'Meşrutiyet düşüncesini savunan ve hürriyet fikirleriyle tanınan Osmanlı aydını kimdir?', options:['Namık Kemal','Enver Paşa','Talat Paşa','Cemal Paşa'], answer:'Namık Kemal', explain:'Namık Kemal, meşrutiyet ve hürriyet düşüncesini savunan önemli Osmanlı aydınlarındandır.' },
-      { id:'q19', topic:'birinci-mesrutiyet', prompt:'Aşağıdakilerden hangisi I. Meşrutiyet dönemi aydınları arasında yer almaz?', options:['Enver Paşa','Ali Suavi','Ziya Paşa','Namık Kemal'], answer:'Enver Paşa', explain:'Enver Paşa, I. Meşrutiyet aydınlarından değil, daha sonraki İttihat ve Terakki döneminin önde gelen isimlerindendir.' },
-      { id:'q20', topic:'tanzimat', prompt:'Tanzimat Fermanı ile kişilerin hangi haklarının güvence altına alınması amaçlanmıştır?', options:['Can, mal ve namus güvenliği','Saltanatın kaldırılması','Halifeliğin kaldırılması','Kapitülasyonların kaldırılması'], answer:'Can, mal ve namus güvenliği', explain:'Tanzimat Fermanı, kişilerin can, mal ve namus güvenliğinin korunmasını öngörmüştür.' },
-      { id:'q21', topic:'tanzimat', prompt:'Tanzimat Fermanı’nda vergilendirmeyle ilgili hangi ilke benimsenmiştir?', options:['Verginin herkesin gelirine göre alınması','Vergilerin tamamen kaldırılması','Yalnızca gayrimüslimlerden vergi alınması','Vergilerin yalnızca askerlerden alınması'], answer:'Verginin herkesin gelirine göre alınması', explain:'Tanzimat Fermanı’nda verginin kişilerin gelirleriyle orantılı biçimde alınması ilkesi yer alır.' },
-      { id:'q22', topic:'tanzimat', prompt:'Tanzimat Fermanı ile aşağıdaki uygulamalardan hangisinin önlenmesi amaçlanmıştır?', options:['Rüşvet ve iltimas','Eğitimin yaygınlaştırılması','Demir yolu yapımı','Meclis seçimleri'], answer:'Rüşvet ve iltimas', explain:'Tanzimat Fermanı, rüşvet ve iltimasın önlenmesine yönelik hükümler içerir.' },
-      { id:'q23', topic:'antlasmalar', prompt:'I. Dünya Savaşı’ndan sonra Almanya ile imzalanan barış antlaşması hangisidir?', options:['Versay','Sevr','Nöyyi','Triyanon'], answer:'Versay', explain:'Almanya ile Versay Antlaşması imzalanmıştır.' },
-      { id:'q24', topic:'antlasmalar', prompt:'I. Dünya Savaşı’ndan sonra Avusturya ile imzalanan antlaşma hangisidir?', options:['Sen Jermen','Sevr','Versay','Nöyyi'], answer:'Sen Jermen', explain:'Avusturya ile Sen Jermen (Saint-Germain) Antlaşması imzalanmıştır.' },
-      { id:'q25', topic:'antlasmalar', prompt:'I. Dünya Savaşı’ndan sonra Bulgaristan ile imzalanan antlaşma hangisidir?', options:['Nöyyi (Neuilly)','Triyanon (Trianon)','Sevr','Versay'], answer:'Nöyyi (Neuilly)', explain:'Bulgaristan ile Nöyyi (Neuilly) Antlaşması imzalanmıştır.' },
-      { id:'q26', topic:'antlasmalar', prompt:'I. Dünya Savaşı’ndan sonra Macaristan ile imzalanan antlaşma hangisidir?', options:['Triyanon (Trianon)','Sen Jermen','Versay','Sevr'], answer:'Triyanon (Trianon)', explain:'Macaristan ile Triyanon (Trianon) Antlaşması imzalanmıştır.' },
-      { id:'q27', topic:'antlasmalar', prompt:'Osmanlı Devleti’ne I. Dünya Savaşı sonrasında imzalatılan barış antlaşması hangisidir?', options:['Sevr','Versay','Nöyyi','Triyanon'], answer:'Sevr', explain:'Osmanlı Devleti için Sevr Antlaşması imzalanmıştır.' },
-      { id:'q28', topic:'kadin-haklari', prompt:'Türkiye’de kadınlara tanınan siyasi hakların kronolojik sıralaması hangisidir?', options:['Belediye seçimleri, muhtarlık/köy ihtiyar heyeti, milletvekili seçme-seçilme','Önce milletvekilliği, sonra belediye, sonra muhtarlık','Önce valilik, sonra cumhurbaşkanlığı, sonra belediye','Önce muhtarlık, sonra milletvekilliği, sonra belediye'], answer:'Belediye seçimleri, muhtarlık/köy ihtiyar heyeti, milletvekili seçme-seçilme', explain:'Kronolojik sıra 1930’da belediye, 1933’te muhtarlık/köy ihtiyar heyeti, 1934’te milletvekili haklarıdır.' },
-      { id:'q29', topic:'kadin-haklari', prompt:'Türk kadınlarına milletvekili seçme ve seçilme hakkı hangi yıl verilmiştir?', options:['1934','1923','1930','1945'], answer:'1934', explain:'Kadınlara milletvekili seçme ve seçilme hakkı 1934 yılında tanınmıştır.' },
-      { id:'q30', topic:'kongreler', prompt:'Mustafa Kemal’in Millî Mücadele döneminde katıldığı kongrelerden biri hangisidir?', options:['Erzurum Kongresi','Alaşehir Kongresi','Balıkesir Kongresi','Nazilli Kongresi'], answer:'Erzurum Kongresi', explain:'Erzurum Kongresi, Mustafa Kemal’in katıldığı Millî Mücadele kongrelerinden biridir.' },
-      { id:'q31', topic:'kongreler', prompt:'Mustafa Kemal’in Güney Anadolu’daki Millî Mücadele çalışmaları sırasında katıldığı kongre hangisidir?', options:['Pozantı Kongresi','Amasya Kongresi','Alaşehir Kongresi','Balıkesir Kongresi'], answer:'Pozantı Kongresi', explain:'Mustafa Kemal, 5 Ağustos 1920’de Pozantı Kongresi’ne katılmıştır.' },
-      { id:'q32', topic:'duraklama', prompt:'Osmanlı Devleti’nin Duraklama Dönemi’nde mücadele ettiği denizci Avrupa devletlerinden biri hangisidir?', options:['Venedik','İsveç','Portekiz','Hollanda'], answer:'Venedik', explain:'Venedik, Osmanlı Devleti’nin Duraklama Dönemi’nde mücadele ettiği devletlerden biridir.' },
-      { id:'q33', topic:'duraklama', prompt:'Osmanlı Devleti’nin Duraklama Dönemi’nde doğu sınırında mücadele ettiği devlet hangisidir?', options:['İran','İspanya','İsveç','Portekiz'], answer:'İran', explain:'Osmanlı Devleti, Duraklama Dönemi’nde doğuda İran ile mücadele etmiştir.' },
-      { id:'q34', topic:'opec', prompt:'Aşağıdaki ülkelerden hangisi OPEC’in kurucu üyelerinden biridir?', options:['Kuveyt','Türkiye','Mısır','Brezilya'], answer:'Kuveyt', explain:'Kuveyt, 1960 yılında OPEC’i kuran beş ülke arasında yer alır.' },
-      { id:'q35', topic:'vilayet', prompt:'Vilayet-i Sitte içinde yer alan illerden biri hangisidir?', options:['Van','Amasya','Çorum','Tokat'], answer:'Van', explain:'Vilayet-i Sitte; Bitlis, Erzurum, Sivas, Van, Elazığ ve Diyarbakır’dan oluşur.' },
-      { id:'q36', topic:'inonu', prompt:'I. İnönü Muharebesi sonrasında TBMM Hükûmeti ile Sovyet Rusya arasında imzalanan antlaşma hangisidir?', options:['Moskova Antlaşması','Lozan Antlaşması','Ankara Antlaşması','Gümrü Antlaşması'], answer:'Moskova Antlaşması', explain:'TBMM Hükûmeti ile Sovyet Rusya arasında 1921’de Moskova Antlaşması imzalanmıştır.' }
+      { id: 'q01', topic: 'fronts', prompt: 'Mustafa Kemal’in I. Dünya Savaşı’nda görev aldığı cepheler hangi seçenekte doğru verilmiştir?', options: ['Çanakkale, Kafkas ve Suriye', 'Yemen, Hicaz ve Galiçya', 'Kanal, Irak ve Romanya', 'Trablusgarp, Balkan ve Kırım'], answer: 'Çanakkale, Kafkas ve Suriye', explain: 'Mustafa Kemal, I. Dünya Savaşı sırasında Çanakkale, Kafkas ve Suriye cephelerinde görev yapmıştır.' },
+      { id: 'q02', topic: 'fronts', prompt: 'Mustafa Kemal’in I. Dünya Savaşı’nda görev yaptığı doğu cephesi hangisidir?', options: ['Kafkas Cephesi', 'Kanal Cephesi', 'Hicaz Cephesi', 'Galiçya Cephesi'], answer: 'Kafkas Cephesi', explain: 'Mustafa Kemal, Kafkas Cephesi’nde Rus kuvvetlerine karşı görev yapmıştır.' },
+      { id: 'q03', topic: 'vilayet', prompt: 'Vilayet-i Sitte aşağıdaki illerin hangisinden oluşur?', options: ['Bitlis, Erzurum, Sivas, Van, Elazığ, Diyarbakır', 'Samsun, Amasya, Çorum, Tokat, Yozgat, Ordu', 'Edirne, Selanik, Manastır, Üsküp, Kosova, Yanya', 'Ankara, Konya, Kayseri, Sivas, Yozgat, Niğde'], answer: 'Bitlis, Erzurum, Sivas, Van, Elazığ, Diyarbakır', explain: 'Vilayet-i Sitte; Bitlis, Erzurum, Sivas, Van, Elazığ ve Diyarbakır vilayetlerini ifade eder.' },
+      { id: 'q04', topic: 'vilayet', prompt: 'Aşağıdaki illerden hangisi Vilayet-i Sitte içinde yer almaz?', options: ['Samsun', 'Bitlis', 'Erzurum', 'Van'], answer: 'Samsun', explain: 'Vilayet-i Sitte içinde Bitlis, Erzurum, Sivas, Van, Elazığ ve Diyarbakır bulunur; Samsun bu grupta yer almaz.' },
+      { id: 'q05', topic: 'opec', prompt: 'OPEC’in 1960 yılında kurucu üyeleri arasında yer alan ülkeler hangileridir?', options: ['Venezuela, İran, Suudi Arabistan, Kuveyt, Irak', 'Türkiye, İran, Mısır, Irak, Suriye', 'Venezuela, Brezilya, Meksika, Kuveyt, Irak', 'İran, Katar, BAE, Bahreyn, Suudi Arabistan'], answer: 'Venezuela, İran, Suudi Arabistan, Kuveyt, Irak', explain: 'OPEC’in beş kurucu üyesi Venezuela, İran, Suudi Arabistan, Kuveyt ve Irak’tır.' },
+      { id: 'q06', topic: 'opec', prompt: 'OPEC hangi yıl kurulmuştur?', options: ['1923', '1945', '1960', '1973'], answer: '1960', explain: 'OPEC, 1960 yılında Bağdat Konferansı sırasında kuruldu.' },
+      { id: 'q07', topic: 'gerileme', prompt: 'Lale Devri hangi Osmanlı padişahının döneminde yaşanmıştır?', options: ['III. Ahmet', 'I. Mahmut', 'II. Mahmut', 'IV. Murat'], answer: 'III. Ahmet', explain: 'Lale Devri, III. Ahmet döneminde yaşanmıştır.' },
+      { id: 'q08', topic: 'gerileme', prompt: 'Nizam-ı Cedid yeniliklerini başlatan Osmanlı padişahı kimdir?', options: ['III. Selim', 'I. Mahmut', 'III. Ahmet', 'I. Abdülhamit'], answer: 'III. Selim', explain: 'Nizam-ı Cedid yenilikleri III. Selim döneminde başlatılmıştır.' },
+      { id: 'q09', topic: 'balkan', prompt: 'I. Balkan Savaşı sonrasında Osmanlı Devleti’nin kaybettiği yerler aşağıdakilerden hangisinde birlikte verilmiştir?', options: ['Trakya, Ege adaları, Makedonya, Arnavutluk, Selanik', 'Kars, Ardahan, Batum, Artvin, Sarıkamış', 'Musul, Kerkük, Halep, Şam, Beyrut', 'Kıbrıs, Girit, Rodos, On İki Ada, Malta'], answer: 'Trakya, Ege adaları, Makedonya, Arnavutluk, Selanik', explain: 'Notlarında I. Balkan Savaşı sonrasında kaybedilen yerler arasında Trakya, Ege adaları, Makedonya, Arnavutluk ve Selanik yer alıyor.' },
+      { id: 'q10', topic: 'balkan', prompt: 'I. Balkan Savaşı sırasında bağımsızlığını ilan ederek Osmanlı Devleti’nden ayrılan devlet hangisidir?', options: ['Arnavutluk', 'Romanya', 'Yunanistan', 'Sırbistan'], answer: 'Arnavutluk', explain: 'Arnavutluk, 1912’de bağımsızlığını ilan etti.' },
+      { id: 'q11', topic: 'yesilirmak', prompt: 'Yeşilırmak Havzası Projesi kapsamındaki iller hangileridir?', options: ['Samsun, Amasya, Çorum, Tokat', 'Adana, Mersin, Hatay, Osmaniye', 'Diyarbakır, Batman, Siirt, Şırnak', 'İzmir, Manisa, Aydın, Denizli'], answer: 'Samsun, Amasya, Çorum, Tokat', explain: 'Yeşilırmak Havzası Projesi Samsun, Amasya, Çorum ve Tokat illerini kapsar.' },
+      { id: 'q12', topic: 'yesilirmak', prompt: 'Aşağıdaki illerden hangisi Yeşilırmak Havzası Projesi kapsamındadır?', options: ['Amasya', 'Adana', 'Diyarbakır', 'İzmir'], answer: 'Amasya', explain: 'Amasya, Samsun, Çorum ve Tokat ile birlikte proje kapsamındadır.' },
+      { id: 'q13', topic: 'inonu', prompt: 'I. İnönü Muharebesi’nin ardından TBMM Hükûmeti hangi konferansa davet edilmiştir?', options: ['Londra Konferansı', 'Lozan Konferansı', 'Paris Barış Konferansı', 'Berlin Konferansı'], answer: 'Londra Konferansı', explain: 'I. İnönü Muharebesi’nden sonra TBMM Hükûmeti Londra Konferansı’na davet edildi.' },
+      { id: 'q14', topic: 'inonu', prompt: 'I. İnönü Muharebesi sonrasında TBMM Hükûmeti ile dostluk antlaşması imzalayan ülke hangisidir?', options: ['Afganistan', 'İtalya', 'Yunanistan', 'Bulgaristan'], answer: 'Afganistan', explain: 'TBMM Hükûmeti ile Afganistan arasında 1921’de dostluk antlaşması imzalandı.' },
+      { id: 'q15', topic: 'inonu', prompt: 'Türkiye’nin 1921 Anayasası aşağıdaki adlardan hangisiyle bilinir?', options: ['Teşkilât-ı Esasiye Kanunu', 'Kanun-ı Esasi', 'Sened-i İttifak', 'Tanzimat Fermanı'], answer: 'Teşkilât-ı Esasiye Kanunu', explain: '1921 Anayasası, Teşkilât-ı Esasiye Kanunu adıyla kabul edilmiştir.' },
+      { id: 'q16', topic: 'ikinci-mesrutiyet', prompt: 'II. Meşrutiyet döneminde İttihat ve Terakki yönetiminde öne çıkan isimlerden biri kimdir?', options: ['Talat Paşa', 'Namık Kemal', 'Ziya Paşa', 'Ali Suavi'], answer: 'Talat Paşa', explain: 'Talat Paşa, II. Meşrutiyet döneminde İttihat ve Terakki’nin önde gelen isimlerindendir.' },
+      { id: 'q17', topic: 'ikinci-mesrutiyet', prompt: 'Aşağıdakilerden hangisi II. Meşrutiyet dönemiyle ilişkilendirilen isimlerden biridir?', options: ['Abdullah Cevdet', 'Ziya Paşa', 'Namık Kemal', 'Mustafa Fazıl Paşa'], answer: 'Abdullah Cevdet', explain: 'Abdullah Cevdet, II. Meşrutiyet dönemindeki fikir ve siyaset çevreleriyle ilişkilidir.' },
+      { id: 'q18', topic: 'birinci-mesrutiyet', prompt: 'Meşrutiyet düşüncesini savunan ve hürriyet fikirleriyle tanınan Osmanlı aydını kimdir?', options: ['Namık Kemal', 'Enver Paşa', 'Talat Paşa', 'Cemal Paşa'], answer: 'Namık Kemal', explain: 'Namık Kemal, meşrutiyet ve hürriyet düşüncesini savunan önemli Osmanlı aydınlarındandır.' },
+      { id: 'q19', topic: 'birinci-mesrutiyet', prompt: 'Aşağıdakilerden hangisi I. Meşrutiyet dönemi aydınları arasında yer almaz?', options: ['Enver Paşa', 'Ali Suavi', 'Ziya Paşa', 'Namık Kemal'], answer: 'Enver Paşa', explain: 'Enver Paşa, I. Meşrutiyet aydınlarından değil, daha sonraki İttihat ve Terakki döneminin önde gelen isimlerindendir.' },
+      { id: 'q20', topic: 'tanzimat', prompt: 'Tanzimat Fermanı ile kişilerin hangi haklarının güvence altına alınması amaçlanmıştır?', options: ['Can, mal ve namus güvenliği', 'Saltanatın kaldırılması', 'Halifeliğin kaldırılması', 'Kapitülasyonların kaldırılması'], answer: 'Can, mal ve namus güvenliği', explain: 'Tanzimat Fermanı, kişilerin can, mal ve namus güvenliğinin korunmasını öngörmüştür.' },
+      { id: 'q21', topic: 'tanzimat', prompt: 'Tanzimat Fermanı’nda vergilendirmeyle ilgili hangi ilke benimsenmiştir?', options: ['Verginin herkesin gelirine göre alınması', 'Vergilerin tamamen kaldırılması', 'Yalnızca gayrimüslimlerden vergi alınması', 'Vergilerin yalnızca askerlerden alınması'], answer: 'Verginin herkesin gelirine göre alınması', explain: 'Tanzimat Fermanı’nda verginin kişilerin gelirleriyle orantılı biçimde alınması ilkesi yer alır.' },
+      { id: 'q22', topic: 'tanzimat', prompt: 'Tanzimat Fermanı ile aşağıdaki uygulamalardan hangisinin önlenmesi amaçlanmıştır?', options: ['Rüşvet ve iltimas', 'Eğitimin yaygınlaştırılması', 'Demir yolu yapımı', 'Meclis seçimleri'], answer: 'Rüşvet ve iltimas', explain: 'Tanzimat Fermanı, rüşvet ve iltimasın önlenmesine yönelik hükümler içerir.' },
+      { id: 'q23', topic: 'antlasmalar', prompt: 'I. Dünya Savaşı’ndan sonra Almanya ile imzalanan barış antlaşması hangisidir?', options: ['Versay', 'Sevr', 'Nöyyi', 'Triyanon'], answer: 'Versay', explain: 'Almanya ile Versay Antlaşması imzalanmıştır.' },
+      { id: 'q24', topic: 'antlasmalar', prompt: 'I. Dünya Savaşı’ndan sonra Avusturya ile imzalanan antlaşma hangisidir?', options: ['Sen Jermen', 'Sevr', 'Versay', 'Nöyyi'], answer: 'Sen Jermen', explain: 'Avusturya ile Sen Jermen (Saint-Germain) Antlaşması imzalanmıştır.' },
+      { id: 'q25', topic: 'antlasmalar', prompt: 'I. Dünya Savaşı’ndan sonra Bulgaristan ile imzalanan antlaşma hangisidir?', options: ['Nöyyi (Neuilly)', 'Triyanon (Trianon)', 'Sevr', 'Versay'], answer: 'Nöyyi (Neuilly)', explain: 'Bulgaristan ile Nöyyi (Neuilly) Antlaşması imzalanmıştır.' },
+      { id: 'q26', topic: 'antlasmalar', prompt: 'I. Dünya Savaşı’ndan sonra Macaristan ile imzalanan antlaşma hangisidir?', options: ['Triyanon (Trianon)', 'Sen Jermen', 'Versay', 'Sevr'], answer: 'Triyanon (Trianon)', explain: 'Macaristan ile Triyanon (Trianon) Antlaşması imzalanmıştır.' },
+      { id: 'q27', topic: 'antlasmalar', prompt: 'Osmanlı Devleti’ne I. Dünya Savaşı sonrasında imzalatılan barış antlaşması hangisidir?', options: ['Sevr', 'Versay', 'Nöyyi', 'Triyanon'], answer: 'Sevr', explain: 'Osmanlı Devleti için Sevr Antlaşması imzalanmıştır.' },
+      { id: 'q28', topic: 'kadin-haklari', prompt: 'Türkiye’de kadınlara tanınan siyasi hakların kronolojik sıralaması hangisidir?', options: ['Belediye seçimleri, muhtarlık/köy ihtiyar heyeti, milletvekili seçme-seçilme', 'Önce milletvekilliği, sonra belediye, sonra muhtarlık', 'Önce valilik, sonra cumhurbaşkanlığı, sonra belediye', 'Önce muhtarlık, sonra milletvekilliği, sonra belediye'], answer: 'Belediye seçimleri, muhtarlık/köy ihtiyar heyeti, milletvekili seçme-seçilme', explain: 'Kronolojik sıra 1930’da belediye, 1933’te muhtarlık/köy ihtiyar heyeti, 1934’te milletvekili haklarıdır.' },
+      { id: 'q29', topic: 'kadin-haklari', prompt: 'Türk kadınlarına milletvekili seçme ve seçilme hakkı hangi yıl verilmiştir?', options: ['1934', '1923', '1930', '1945'], answer: '1934', explain: 'Kadınlara milletvekili seçme ve seçilme hakkı 1934 yılında tanınmıştır.' },
+      { id: 'q30', topic: 'kongreler', prompt: 'Mustafa Kemal’in Millî Mücadele döneminde katıldığı kongrelerden biri hangisidir?', options: ['Erzurum Kongresi', 'Alaşehir Kongresi', 'Balıkesir Kongresi', 'Nazilli Kongresi'], answer: 'Erzurum Kongresi', explain: 'Erzurum Kongresi, Mustafa Kemal’in katıldığı Millî Mücadele kongrelerinden biridir.' },
+      { id: 'q31', topic: 'kongreler', prompt: 'Mustafa Kemal’in Güney Anadolu’daki Millî Mücadele çalışmaları sırasında katıldığı kongre hangisidir?', options: ['Pozantı Kongresi', 'Amasya Kongresi', 'Alaşehir Kongresi', 'Balıkesir Kongresi'], answer: 'Pozantı Kongresi', explain: 'Mustafa Kemal, 5 Ağustos 1920’de Pozantı Kongresi’ne katılmıştır.' },
+      { id: 'q32', topic: 'duraklama', prompt: 'Osmanlı Devleti’nin Duraklama Dönemi’nde mücadele ettiği denizci Avrupa devletlerinden biri hangisidir?', options: ['Venedik', 'İsveç', 'Portekiz', 'Hollanda'], answer: 'Venedik', explain: 'Venedik, Osmanlı Devleti’nin Duraklama Dönemi’nde mücadele ettiği devletlerden biridir.' },
+      { id: 'q33', topic: 'duraklama', prompt: 'Osmanlı Devleti’nin Duraklama Dönemi’nde doğu sınırında mücadele ettiği devlet hangisidir?', options: ['İran', 'İspanya', 'İsveç', 'Portekiz'], answer: 'İran', explain: 'Osmanlı Devleti, Duraklama Dönemi’nde doğuda İran ile mücadele etmiştir.' },
+      { id: 'q34', topic: 'opec', prompt: 'Aşağıdaki ülkelerden hangisi OPEC’in kurucu üyelerinden biridir?', options: ['Kuveyt', 'Türkiye', 'Mısır', 'Brezilya'], answer: 'Kuveyt', explain: 'Kuveyt, 1960 yılında OPEC’i kuran beş ülke arasında yer alır.' },
+      { id: 'q35', topic: 'vilayet', prompt: 'Vilayet-i Sitte içinde yer alan illerden biri hangisidir?', options: ['Van', 'Amasya', 'Çorum', 'Tokat'], answer: 'Van', explain: 'Vilayet-i Sitte; Bitlis, Erzurum, Sivas, Van, Elazığ ve Diyarbakır’dan oluşur.' },
+      { id: 'q36', topic: 'inonu', prompt: 'I. İnönü Muharebesi sonrasında TBMM Hükûmeti ile Sovyet Rusya arasında imzalanan antlaşma hangisidir?', options: ['Moskova Antlaşması', 'Lozan Antlaşması', 'Ankara Antlaşması', 'Gümrü Antlaşması'], answer: 'Moskova Antlaşması', explain: 'TBMM Hükûmeti ile Sovyet Rusya arasında 1921’de Moskova Antlaşması imzalanmıştır.' },
+      { id: 'q37', topic: 'fronts', prompt: 'Mustafa Kemal’in Çanakkale Cephesi’ndeki başarılarıyla öne çıktığı savaş hangisidir?', options: ['I. Dünya Savaşı', 'Trablusgarp Savaşı', 'I. Balkan Savaşı', 'Kırım Savaşı'], answer: 'I. Dünya Savaşı', explain: 'Çanakkale Cephesi, I. Dünya Savaşı sırasında açılmıştır.' },
+      { id: 'q38', topic: 'fronts', prompt: 'Mustafa Kemal’in Çanakkale Cephesi’nde özellikle tanınmasını sağlayan askerî başarısı aşağıdakilerden hangisidir?', options: ['Anafartalar ve Conkbayırı çevresindeki başarıları', 'Kütahya-Eskişehir Muharebeleri', 'Sakarya Meydan Muharebesi', 'Büyük Taarruz'], answer: 'Anafartalar ve Conkbayırı çevresindeki başarıları', explain: 'Mustafa Kemal, Çanakkale’de özellikle Anafartalar ve Conkbayırı çevresindeki başarılarıyla tanınmıştır.' },
+      { id: 'q39', topic: 'fronts', prompt: 'Mustafa Kemal’in I. Dünya Savaşı’nda Rus kuvvetlerine karşı görev yaptığı cephe hangisidir?', options: ['Kafkas Cephesi', 'Suriye Cephesi', 'Çanakkale Cephesi', 'Kanal Cephesi'], answer: 'Kafkas Cephesi', explain: 'Kafkas Cephesi’nde Osmanlı Devleti, Rus kuvvetlerine karşı mücadele etmiştir.' },
+      { id: 'q40', topic: 'fronts', prompt: 'Mustafa Kemal’in I. Dünya Savaşı’nın son döneminde görev yaptığı cephe aşağıdakilerden hangisidir?', options: ['Suriye Cephesi', 'Galiçya Cephesi', 'Romanya Cephesi', 'Makedonya Cephesi'], answer: 'Suriye Cephesi', explain: 'Mustafa Kemal, savaşın son döneminde Suriye-Filistin bölgesinde görev yapmıştır.' },
+
+      { id: 'q41', topic: 'vilayet', prompt: 'Vilayet-i Sitte kodlamasında B harfi hangi ili temsil eder?', options: ['Bitlis', 'Bolu', 'Bursa', 'Bilecik'], answer: 'Bitlis', explain: 'BESVED kodlamasındaki B harfi Bitlis’i temsil eder.' },
+      { id: 'q42', topic: 'vilayet', prompt: 'Vilayet-i Sitte içerisinde yer alan ve kodlamada E harfiyle gösterilen il hangisidir?', options: ['Erzurum', 'Edirne', 'Eskişehir', 'Erzincan'], answer: 'Erzurum', explain: 'BESVED kodlamasında E harfi Erzurum’u temsil eder.' },
+      { id: 'q43', topic: 'vilayet', prompt: 'Vilayet-i Sitte içerisinde yer alan Sivas hangi tarihsel kavramla ilişkilidir?', options: ['Altı vilayet', 'Yeşilırmak Havzası Projesi', 'OPEC kurucu üyeliği', 'I. Balkan Savaşı'], answer: 'Altı vilayet', explain: 'Sivas, Vilayet-i Sitte olarak bilinen altı vilayetten biridir.' },
+      { id: 'q44', topic: 'vilayet', prompt: 'Aşağıdaki illerden hangisi Vilayet-i Sitte kapsamında yer alır?', options: ['Van', 'Trabzon', 'Samsun', 'Amasya'], answer: 'Van', explain: 'Vilayet-i Sitte içerisinde Van bulunur.' },
+      { id: 'q45', topic: 'vilayet', prompt: 'Vilayet-i Sitte içerisinde yer alan Elazığ’ın eski adı aşağıdakilerden hangisidir?', options: ['Mamuratülaziz', 'Diyarbekir', 'Erzurum', 'Bitlis'], answer: 'Mamuratülaziz', explain: 'Elazığ, tarihsel olarak Mamuratülaziz adıyla da anılmıştır.' },
+      { id: 'q46', topic: 'vilayet', prompt: 'Vilayet-i Sitte içerisinde bulunan Diyarbakır hangi grupta yer alır?', options: ['Osmanlı’nın altı doğu vilayeti', 'Yeşilırmak Havzası illeri', 'OPEC kurucu üyeleri', 'I. Balkan Savaşı’nda bağımsız olan devletler'], answer: 'Osmanlı’nın altı doğu vilayeti', explain: 'Diyarbakır, Vilayet-i Sitte kapsamındaki altı vilayetten biridir.' },
+
+      { id: 'q47', topic: 'opec', prompt: 'OPEC’in kurucu üyeleri arasında Güney Amerika kıtasından bulunan ülke hangisidir?', options: ['Venezuela', 'Meksika', 'Brezilya', 'Arjantin'], answer: 'Venezuela', explain: 'Venezuela, OPEC’in 1960 yılındaki beş kurucu üyesinden biridir.' },
+      { id: 'q48', topic: 'opec', prompt: 'OPEC’in kurucu üyelerinden biri olan İran hangi bölgede yer alır?', options: ['Orta Doğu', 'Güney Amerika', 'Kuzey Avrupa', 'Orta Afrika'], answer: 'Orta Doğu', explain: 'İran, OPEC’in kurucu üyelerindendir ve Orta Doğu’da bulunur.' },
+      { id: 'q49', topic: 'opec', prompt: 'Aşağıdaki ülkelerden hangisi OPEC’in kurucu üyeleri arasında yer almıştır?', options: ['Suudi Arabistan', 'Türkiye', 'Mısır', 'Pakistan'], answer: 'Suudi Arabistan', explain: 'Suudi Arabistan, OPEC’in 1960 yılındaki kurucu üyelerinden biridir.' },
+      { id: 'q50', topic: 'opec', prompt: 'OPEC’in kurucu üyelerinden biri olan Irak, örgütün kuruluşunda hangi ülke grubuyla birlikte yer almıştır?', options: ['Venezuela, İran, Suudi Arabistan ve Kuveyt', 'Türkiye, Mısır, Suriye ve Ürdün', 'Katar, BAE, Bahreyn ve Umman', 'Libya, Cezayir, Nijerya ve Angola'], answer: 'Venezuela, İran, Suudi Arabistan ve Kuveyt', explain: 'Irak, Venezuela, İran, Suudi Arabistan ve Kuveyt ile birlikte OPEC’i kurmuştur.' },
+      { id: 'q51', topic: 'opec', prompt: 'OPEC’in kurulduğu Bağdat Konferansı hangi yılda yapılmıştır?', options: ['1950', '1955', '1960', '1970'], answer: '1960', explain: 'OPEC, 1960 yılında Bağdat’ta gerçekleştirilen toplantı sırasında kurulmuştur.' },
+
+      { id: 'q52', topic: 'gerileme', prompt: 'Osmanlı Gerileme Dönemi padişahları kodlamasında ilk sırada yer alan III. Ahmet hangi dönemle özdeşleşmiştir?', options: ['Lale Devri', 'Tanzimat Dönemi', 'Fetret Devri', 'Meşrutiyet Dönemi'], answer: 'Lale Devri', explain: 'Lale Devri, III. Ahmet döneminde yaşanmıştır.' },
+      { id: 'q53', topic: 'gerileme', prompt: 'Osmanlı Gerileme Dönemi padişahları arasında bulunan I. Mahmut hangi padişahın ardından tahta çıkmıştır?', options: ['III. Ahmet', 'III. Selim', 'I. Abdülhamit', 'III. Mustafa'], answer: 'III. Ahmet', explain: 'I. Mahmut, Patrona Halil İsyanı sonucunda III. Ahmet’in tahttan indirilmesinden sonra tahta çıkmıştır.' },
+      { id: 'q54', topic: 'gerileme', prompt: 'Osmanlı Gerileme Dönemi padişahlarından III. Mustafa’nın ardından tahta çıkan padişah kimdir?', options: ['I. Abdülhamit', 'III. Ahmet', 'III. Selim', 'I. Mahmut'], answer: 'I. Abdülhamit', explain: 'III. Mustafa’nın ardından I. Abdülhamit tahta çıkmıştır.' },
+      { id: 'q55', topic: 'gerileme', prompt: 'Osmanlı Gerileme Dönemi padişahlarından I. Abdülhamit’in ardından tahta kim geçmiştir?', options: ['III. Selim', 'III. Mustafa', 'I. Mahmut', 'III. Ahmet'], answer: 'III. Selim', explain: 'I. Abdülhamit’in ardından III. Selim tahta çıkmıştır.' },
+      { id: 'q56', topic: 'gerileme', prompt: 'Nizam-ı Cedid hareketiyle özdeşleşen padişah aşağıdakilerden hangisidir?', options: ['III. Selim', 'I. Mahmut', 'III. Ahmet', 'III. Mustafa'], answer: 'III. Selim', explain: 'III. Selim, devletin askerî ve idari yapısını yenilemek amacıyla Nizam-ı Cedid reformlarını başlatmıştır.' },
+
+      { id: 'q57', topic: 'balkan', prompt: 'I. Balkan Savaşı sonucunda Osmanlı Devleti’nden ayrılarak bağımsızlığını ilan eden devlet hangisidir?', options: ['Arnavutluk', 'Romanya', 'Karadağ', 'Bulgaristan'], answer: 'Arnavutluk', explain: 'Arnavutluk, 1912’de bağımsızlığını ilan etmiştir.' },
+      { id: 'q58', topic: 'balkan', prompt: 'I. Balkan Savaşı sırasında Osmanlı Devleti’nin Balkanlarda kaybettiği önemli şehirlerden biri hangisidir?', options: ['Selanik', 'Ankara', 'Konya', 'Kayseri'], answer: 'Selanik', explain: 'Selanik, I. Balkan Savaşı sırasında Osmanlı Devleti’nin kaybettiği önemli şehirlerdendir.' },
+      { id: 'q59', topic: 'balkan', prompt: 'I. Balkan Savaşı sonrasında Osmanlı Devleti’nin Balkanlardaki toprak kayıpları arasında hangi bölge bulunur?', options: ['Makedonya', 'Kafkasya', 'Hicaz', 'Musul'], answer: 'Makedonya', explain: 'Makedonya, Balkan Savaşları sırasında Osmanlı Devleti’nin elinden çıkan bölgeler arasındadır.' },
+      { id: 'q60', topic: 'balkan', prompt: 'I. Balkan Savaşı sonunda Osmanlı Devleti’nin kaybettiği yerler arasında aşağıdakilerden hangisi sayılır?', options: ['Ege adalarının önemli bir bölümü', 'Kars ve Ardahan', 'Musul ve Kerkük', 'Kıbrıs ve Malta'], answer: 'Ege adalarının önemli bir bölümü', explain: 'Osmanlı Devleti, Balkan Savaşları sırasında Ege adaları üzerindeki hâkimiyetinin önemli bölümünü kaybetmiştir.' },
+      { id: 'q61', topic: 'balkan', prompt: 'I. Balkan Savaşı sonucunda Osmanlı Devleti’nin Avrupa’daki toprakları büyük ölçüde hangi bölgeyle sınırlanmıştır?', options: ['Doğu Trakya', 'Makedonya', 'Arnavutluk', 'Selanik çevresi'], answer: 'Doğu Trakya', explain: 'Balkan Savaşları sonunda Osmanlı Devleti’nin Avrupa’daki toprakları büyük ölçüde Doğu Trakya ile sınırlanmıştır. Edirne, II. Balkan Savaşı sırasında geri alınmıştır.' },
+      { id: 'q62', topic: 'balkan', prompt: 'Aşağıdakilerden hangisi I. Balkan Savaşı sırasında Osmanlı Devleti’ne karşı savaşan devletlerden biridir?', options: ['Bulgaristan', 'İran', 'Afganistan', 'Japonya'], answer: 'Bulgaristan', explain: 'Bulgaristan, I. Balkan Savaşı’nda Osmanlı Devleti’ne karşı savaşan Balkan devletlerinden biridir.' },
+
+      { id: 'q63', topic: 'yesilirmak', prompt: 'Yeşilırmak Havzası Projesi kapsamındaki illerden biri olan Tokat, ezber kodunda hangi ifadeyle hatırlatılmıştır?', options: ['Saç tokası', 'Varil', 'Son vites', 'Çay kahve su'], answer: 'Saç tokası', explain: 'Notlarında Tokat, “SAÇ TOKASI” hatırlatmasıyla verilmiştir.' },
+      { id: 'q64', topic: 'yesilirmak', prompt: 'Aşağıdaki illerden hangisi Yeşilırmak Havzası Projesi kapsamında değildir?', options: ['Diyarbakır', 'Samsun', 'Amasya', 'Tokat'], answer: 'Diyarbakır', explain: 'Proje kapsamındaki iller Samsun, Amasya, Çorum ve Tokat’tır.' },
+      { id: 'q65', topic: 'yesilirmak', prompt: 'Yeşilırmak Havzası Projesi’nin kapsadığı iller hangi seçenekte doğru verilmiştir?', options: ['Samsun, Amasya, Çorum ve Tokat', 'Sivas, Van, Bitlis ve Erzurum', 'İzmir, Aydın, Manisa ve Denizli', 'Adana, Mersin, Hatay ve Antalya'], answer: 'Samsun, Amasya, Çorum ve Tokat', explain: 'Yeşilırmak Havzası Projesi bu dört ili kapsar.' },
+
+      { id: 'q66', topic: 'inonu', prompt: 'I. İnönü Muharebesi’nin ardından TBMM Hükûmetinin uluslararası alanda siyasi görünürlüğünü artıran gelişme hangisidir?', options: ['Londra Konferansı’na davet edilmesi', 'Sevr Antlaşması’nın uygulanması', 'Saltanatın kaldırılması', 'Cumhuriyetin ilanı'], answer: 'Londra Konferansı’na davet edilmesi', explain: 'I. İnönü Muharebesi sonrasında TBMM Hükûmeti Londra Konferansı’na davet edilmiştir.' },
+      { id: 'q67', topic: 'inonu', prompt: 'İstiklâl Marşı hangi tarihte kabul edilmiştir?', options: ['12 Mart 1921', '23 Nisan 1920', '29 Ekim 1923', '30 Ağustos 1922'], answer: '12 Mart 1921', explain: 'İstiklâl Marşı, I. İnönü Muharebesi sonrasındaki süreçte, 12 Mart 1921’de kabul edilmiştir.' },
+      { id: 'q68', topic: 'inonu', prompt: 'TBMM Hükûmeti ile Afganistan arasında imzalanan dostluk antlaşması hangi yıldadır?', options: ['1921', '1918', '1923', '1930'], answer: '1921', explain: 'Türkiye-Afganistan dostluk antlaşması 1921 yılında imzalanmıştır.' },
+      { id: 'q69', topic: 'inonu', prompt: 'TBMM Hükûmeti ile Sovyet Rusya arasında imzalanan Moskova Antlaşması hangi yıldadır?', options: ['1921', '1919', '1923', '1934'], answer: '1921', explain: 'Moskova Antlaşması, 16 Mart 1921’de imzalanmıştır.' },
+      { id: 'q70', topic: 'inonu', prompt: 'Teşkilât-ı Esasiye Kanunu hangi yıl kabul edilmiştir?', options: ['1921', '1920', '1923', '1924'], answer: '1921', explain: '1921 Anayasası, Teşkilât-ı Esasiye Kanunu adıyla 1921’de kabul edilmiştir.' },
+      { id: 'q71', topic: 'inonu', prompt: 'Aşağıdakilerden hangisi I. İnönü Muharebesi’nin sonuçları arasında gösterilir?', options: ['Londra Konferansı’na davet edilme', 'Lozan Antlaşması’nın imzalanması', 'Halifeliğin kaldırılması', 'Çok partili hayata geçiş'], answer: 'Londra Konferansı’na davet edilme', explain: 'I. İnönü Muharebesi sonrasında TBMM Hükûmeti Londra Konferansı’na çağrılmıştır.' },
+
+      { id: 'q72', topic: 'ikinci-mesrutiyet', prompt: 'Aşağıdakilerden hangisi II. Meşrutiyet dönemiyle ilişkilendirilen isimlerden biridir?', options: ['Talat Paşa', 'Namık Kemal', 'Ali Suavi', 'Mustafa Fazıl Paşa'], answer: 'Talat Paşa', explain: 'Talat Paşa, II. Meşrutiyet döneminde İttihat ve Terakki Cemiyeti’nin önde gelen isimlerindendir.' },
+      { id: 'q73', topic: 'ikinci-mesrutiyet', prompt: 'II. Meşrutiyet dönemi aydınları arasında yer alan Abdullah Cevdet hangi grupla ilişkilendirilir?', options: ['Batıcılık düşüncesini savunan aydınlar', 'Yalnızca Yeniçeri Ocağı yöneticileri', 'Lale Devri şairleri', 'Klasik dönem Osmanlı denizcileri'], answer: 'Batıcılık düşüncesini savunan aydınlar', explain: 'Abdullah Cevdet, Osmanlı düşünce hayatında Batıcılık akımıyla ilişkilendirilen isimlerdendir.' },
+      { id: 'q74', topic: 'ikinci-mesrutiyet', prompt: 'Aşağıdaki isimlerden hangisi notlarındaki II. Meşrutiyet aydınları listesinde yer alır?', options: ['İsmail Canpolat', 'Ziya Paşa', 'Namık Kemal', 'Ali Suavi'], answer: 'İsmail Canpolat', explain: 'İsmail Canpolat, notlarındaki II. Meşrutiyet dönemi isimleri arasındadır.' },
+      { id: 'q75', topic: 'ikinci-mesrutiyet', prompt: 'Aşağıdakilerden hangisi II. Meşrutiyet döneminin İttihat ve Terakki kadrosuyla ilişkilendirilen isimlerindendir?', options: ['Cemal Paşa', 'Ahmet Mithat Efendi', 'Ziya Paşa', 'Mustafa Fazıl Paşa'], answer: 'Cemal Paşa', explain: 'Cemal Paşa, İttihat ve Terakki yönetiminin önde gelen isimlerinden biridir.' },
+      { id: 'q76', topic: 'ikinci-mesrutiyet', prompt: 'Enver Paşa hangi siyasi çevre ve dönemle daha yakından ilişkilidir?', options: ['II. Meşrutiyet ve İttihat ve Terakki', 'Tanzimat’ın ilanından önceki dönem', 'Lale Devri', 'I. Meşrutiyet’in ilk aydın çevresi'], answer: 'II. Meşrutiyet ve İttihat ve Terakki', explain: 'Enver Paşa, II. Meşrutiyet döneminde İttihat ve Terakki hareketinin önde gelen isimlerindendir.' },
+
+      { id: 'q77', topic: 'birinci-mesrutiyet', prompt: 'Hürriyet ve vatan kavramlarını eserlerinde öne çıkaran Osmanlı aydını kimdir?', options: ['Namık Kemal', 'Enver Paşa', 'Talat Paşa', 'Cemal Paşa'], answer: 'Namık Kemal', explain: 'Namık Kemal, hürriyet ve vatan fikirlerini savunan önemli Osmanlı aydınlarındandır.' },
+      { id: 'q78', topic: 'birinci-mesrutiyet', prompt: 'Aşağıdakilerden hangisi notlarındaki I. Meşrutiyet aydınları arasında yer alır?', options: ['Ahmet Mithat Efendi', 'Enver Paşa', 'Talat Paşa', 'Cemal Paşa'], answer: 'Ahmet Mithat Efendi', explain: 'Ahmet Mithat Efendi, notlarındaki I. Meşrutiyet aydınları listesinde yer almaktadır.' },
+      { id: 'q79', topic: 'birinci-mesrutiyet', prompt: 'I. Meşrutiyet aydınlarından Mustafa Fazıl Paşa hangi grupta değerlendirilir?', options: ['Meşrutiyet ve anayasal yönetim fikrini savunan Osmanlı aydınları', 'OPEC kurucu üyeleri', 'Osmanlı Gerileme Dönemi padişahları', 'I. Dünya Savaşı cephe komutanları'], answer: 'Meşrutiyet ve anayasal yönetim fikrini savunan Osmanlı aydınları', explain: 'Mustafa Fazıl Paşa, Osmanlı’da anayasal yönetim ve reform düşünceleriyle ilişkilendirilir.' },
+      { id: 'q80', topic: 'birinci-mesrutiyet', prompt: 'Aşağıdaki isimlerden hangisi I. Meşrutiyet aydınları arasında yer alır?', options: ['Ali Suavi', 'Enver Paşa', 'Talat Paşa', 'İsmail Canpolat'], answer: 'Ali Suavi', explain: 'Ali Suavi, I. Meşrutiyet döneminin fikir hayatıyla ilişkilendirilen isimlerindendir.' },
+      { id: 'q81', topic: 'birinci-mesrutiyet', prompt: 'Namık Kemal ile Ziya Paşa hangi ortak başlık altında incelenebilir?', options: ['Osmanlı aydınları ve meşrutiyet düşüncesi', 'OPEC’in kuruluşu', 'Balkan devletlerinin bağımsızlığı', 'I. Dünya Savaşı barış antlaşmaları'], answer: 'Osmanlı aydınları ve meşrutiyet düşüncesi', explain: 'Namık Kemal ve Ziya Paşa, Osmanlı’da anayasal yönetim ve hürriyet fikirleriyle ilişkilendirilen aydınlardır.' },
+
+      { id: 'q82', topic: 'tanzimat', prompt: 'Tanzimat Fermanı ile güvence altına alınması amaçlanan temel haklar hangileridir?', options: ['Can, mal ve namus güvenliği', 'Yalnızca padişahın hakları', 'Yalnızca askerlerin hakları', 'Yalnızca yabancı tüccarların hakları'], answer: 'Can, mal ve namus güvenliği', explain: 'Tanzimat Fermanı, kişilerin can, mal ve namus güvenliğini güvence altına almayı amaçlamıştır.' },
+      { id: 'q83', topic: 'tanzimat', prompt: 'Tanzimat Fermanı’nda vergi konusunda hangi ilke benimsenmiştir?', options: ['Verginin herkesin gelirine göre alınması', 'Verginin yalnızca köylülerden alınması', 'Bütün vergilerin kaldırılması', 'Verginin yalnızca gayrimüslimlerden alınması'], answer: 'Verginin herkesin gelirine göre alınması', explain: 'Verginin kişilerin mali gücüne göre alınması hedeflenmiştir.' },
+      { id: 'q84', topic: 'tanzimat', prompt: 'Tanzimat Fermanı ile aşağıdakilerden hangisinin önüne geçilmesi amaçlanmıştır?', options: ['Rüşvet ve iltimas', 'Kanunların uygulanması', 'Vergi düzeninin oluşturulması', 'Askerlik hizmetinin düzenlenmesi'], answer: 'Rüşvet ve iltimas', explain: 'Tanzimat Fermanı, yönetimde keyfî uygulamaları azaltmayı ve rüşvet ile iltiması önlemeyi amaçlamıştır.' },
+      { id: 'q85', topic: 'tanzimat', prompt: 'Tanzimat Fermanı’nda askerlik hizmetiyle ilgili hangi düzenleme öngörülmüştür?', options: ['Askerliğin belirli bir düzene ve süreye bağlanması', 'Askerliğin tamamen kaldırılması', 'Yalnızca yabancıların askerlik yapması', 'Askerlik görevinin yalnızca yöneticilere verilmesi'], answer: 'Askerliğin belirli bir düzene ve süreye bağlanması', explain: 'Tanzimat Fermanı’nda askerlik hizmetinin düzenlenmesi ve belirli bir süreye bağlanması hedeflenmiştir.' },
+      { id: 'q86', topic: 'tanzimat', prompt: 'Tanzimat Fermanı’ndaki eşitlik anlayışı aşağıdakilerden hangisiyle ilgilidir?', options: ['Kanun önünde eşitliğin güçlendirilmesi', 'Saltanatın kaldırılması', 'Cumhuriyetin ilanı', 'Halifeliğin kaldırılması'], answer: 'Kanun önünde eşitliğin güçlendirilmesi', explain: 'Tanzimat Fermanı, Osmanlı tebaasının can, mal ve namus güvenliği ile hukukî güvencelerini geliştirmeyi amaçlamıştır.' },
+
+      { id: 'q87', topic: 'antlasmalar', prompt: 'I. Dünya Savaşı sonrasında Almanya ile imzalanan antlaşma hangisidir?', options: ['Versay', 'Sevr', 'Nöyyi', 'Triyanon'], answer: 'Versay', explain: 'Almanya ile Versay Antlaşması imzalanmıştır.' },
+      { id: 'q88', topic: 'antlasmalar', prompt: 'I. Dünya Savaşı sonrasında Bulgaristan ile imzalanan antlaşma hangisidir?', options: ['Nöyyi', 'Sevr', 'Sen Jermen', 'Versay'], answer: 'Nöyyi', explain: 'Bulgaristan ile Nöyyi Antlaşması imzalanmıştır.' },
+      { id: 'q89', topic: 'antlasmalar', prompt: 'I. Dünya Savaşı sonrasında Macaristan ile imzalanan antlaşma hangisidir?', options: ['Triyanon', 'Versay', 'Sevr', 'Nöyyi'], answer: 'Triyanon', explain: 'Macaristan ile Triyanon Antlaşması imzalanmıştır.' },
+      { id: 'q90', topic: 'antlasmalar', prompt: 'I. Dünya Savaşı sonrasında Avusturya ile imzalanan antlaşma hangisidir?', options: ['Sen Jermen', 'Versay', 'Triyanon', 'Sevr'], answer: 'Sen Jermen', explain: 'Avusturya ile Sen Jermen Antlaşması imzalanmıştır.' },
+      { id: 'q91', topic: 'antlasmalar', prompt: 'I. Dünya Savaşı sonrasında Osmanlı Devleti’ne imzalatılan antlaşma hangisidir?', options: ['Sevr', 'Versay', 'Nöyyi', 'Triyanon'], answer: 'Sevr', explain: 'Osmanlı Devleti’ne Sevr Antlaşması imzalatılmış, ancak antlaşma yürürlüğe girmemiştir.' },
+      { id: 'q92', topic: 'antlasmalar', prompt: 'Aşağıdaki ülke-antlaşma eşleştirmelerinden hangisi yanlıştır?', options: ['Almanya – Sevr', 'Bulgaristan – Nöyyi', 'Macaristan – Triyanon', 'Avusturya – Sen Jermen'], answer: 'Almanya – Sevr', explain: 'Almanya ile Versay Antlaşması imzalanmıştır. Sevr, Osmanlı Devleti ile ilişkilidir.' },
+      { id: 'q93', topic: 'antlasmalar', prompt: 'Versay, Nöyyi, Triyanon ve Sen Jermen antlaşmalarının ortak özelliği nedir?', options: ['I. Dünya Savaşı sonrasında imzalanmaları', 'Osmanlı Gerileme Dönemi’nde imzalanmaları', 'Balkan Savaşları’nı sona erdirmeleri', 'OPEC’in kuruluşunu sağlamaları'], answer: 'I. Dünya Savaşı sonrasında imzalanmaları', explain: 'Bu antlaşmalar, I. Dünya Savaşı sonrasında yenilen devletlerle imzalanan barış antlaşmalarıdır.' },
+
+      { id: 'q94', topic: 'kadin-haklari', prompt: 'Türk kadınlarına belediye seçimlerine katılma hakkı hangi yıl verilmiştir?', options: ['1930', '1923', '1933', '1934'], answer: '1930', explain: 'Kadınlara belediye seçimlerinde seçme ve seçilme hakkı 1930’da verilmiştir.' },
+      { id: 'q95', topic: 'kadin-haklari', prompt: 'Türk kadınlarına köy muhtarlığı ve ihtiyar heyeti seçimlerine katılma hakkı hangi yıl tanınmıştır?', options: ['1933', '1930', '1934', '1926'], answer: '1933', explain: 'Köylerde muhtar ve ihtiyar heyeti seçimlerine katılma hakkı 1933’te tanınmıştır.' },
+      { id: 'q96', topic: 'kadin-haklari', prompt: 'Türk kadınlarına milletvekili seçme ve seçilme hakkı hangi yıl verilmiştir?', options: ['1934', '1930', '1933', '1920'], answer: '1934', explain: 'Milletvekili seçme ve seçilme hakkı 1934’te verilmiştir.' },
+      { id: 'q97', topic: 'kadin-haklari', prompt: 'Türk kadınlarına siyasi hakların verilmesinde doğru kronolojik sıralama hangisidir?', options: ['Belediye seçimleri – köy muhtarlığı – milletvekilliği', 'Milletvekilliği – belediye seçimleri – köy muhtarlığı', 'Köy muhtarlığı – milletvekilliği – belediye seçimleri', 'Belediye seçimleri – milletvekilliği – köy muhtarlığı'], answer: 'Belediye seçimleri – köy muhtarlığı – milletvekilliği', explain: 'Sıralama 1930 belediye, 1933 köy muhtarlığı ve 1934 milletvekili hakları şeklindedir.' },
+
+      { id: 'q98', topic: 'kongreler', prompt: 'Millî Mücadele döneminde Mustafa Kemal’in başkanlığında toplanan kongrelerden biri hangisidir?', options: ['Erzurum Kongresi', 'Berlin Kongresi', 'Viyana Kongresi', 'Paris Barış Konferansı'], answer: 'Erzurum Kongresi', explain: 'Mustafa Kemal, Erzurum Kongresi’nde önemli bir rol üstlenmiştir.' },
+      { id: 'q99', topic: 'kongreler', prompt: 'Millî Mücadele’nin bölgesel direniş hareketlerini birleştiren önemli kongresi hangisidir?', options: ['Sivas Kongresi', 'Berlin Kongresi', 'Viyana Kongresi', 'Bağdat Konferansı'], answer: 'Sivas Kongresi', explain: 'Sivas Kongresi’nde millî cemiyetlerin Anadolu ve Rumeli Müdafaa-i Hukuk Cemiyeti adı altında birleştirilmesi kararlaştırılmıştır.' },
+      { id: 'q100', topic: 'kongreler', prompt: 'Erzurum Kongresi hangi yıl toplanmıştır?', options: ['1919', '1918', '1920', '1922'], answer: '1919', explain: 'Erzurum Kongresi, 23 Temmuz–7 Ağustos 1919 tarihleri arasında yapılmıştır.' },
+      { id: 'q101', topic: 'kongreler', prompt: 'Sivas Kongresi hangi yıl gerçekleştirilmiştir?', options: ['1919', '1917', '1921', '1923'], answer: '1919', explain: 'Sivas Kongresi, 4–11 Eylül 1919 tarihleri arasında yapılmıştır.' },
+      { id: 'q102', topic: 'kongreler', prompt: 'Mustafa Kemal’in Millî Mücadele sırasında katıldığı Pozantı Kongresi hangi bölgede düzenlenmiştir?', options: ['Adana çevresi', 'Doğu Karadeniz', 'Trakya', 'Batı Anadolu kıyıları'], answer: 'Adana çevresi', explain: 'Pozantı Kongresi, Güney Anadolu’daki Millî Mücadele faaliyetleriyle ilişkilidir.' },
+      { id: 'q103', topic: 'kongreler', prompt: 'Aşağıdakilerden hangisi Mustafa Kemal’in katıldığı kongrelerden biri olarak bilinir?', options: ['Sivas Kongresi', 'Berlin Kongresi', 'Viyana Kongresi', 'Lozan Konferansı'], answer: 'Sivas Kongresi', explain: 'Sivas Kongresi, Mustafa Kemal’in Millî Mücadele döneminde katıldığı önemli kongrelerdendir.' },
+
+      { id: 'q104', topic: 'duraklama', prompt: 'Osmanlı Duraklama Dönemi’nde mücadele edilen devletleri hatırlatan VARİL kodundaki V harfi hangi devleti temsil eder?', options: ['Venedik', 'Viyana', 'Vatikan', 'Volga'], answer: 'Venedik', explain: 'VARİL kodundaki V harfi Venedik’i temsil eder.' },
+      { id: 'q105', topic: 'duraklama', prompt: 'VARİL kodundaki A harfi hangi devleti temsil eder?', options: ['Avusturya', 'Arnavutluk', 'Almanya', 'Azerbaycan'], answer: 'Avusturya', explain: 'Osmanlı Duraklama Dönemi’nde mücadele edilen devletlerden biri Avusturya’dır.' },
+      { id: 'q106', topic: 'duraklama', prompt: 'VARİL kodlamasında R harfi hangi devleti ifade eder?', options: ['Rusya', 'Romanya', 'Ragusa', 'Rodos'], answer: 'Rusya', explain: 'Notlarındaki VARİL kodlamasında R harfi Rusya’yı temsil eder.' },
+      { id: 'q107', topic: 'duraklama', prompt: 'Osmanlı Duraklama Dönemi’nde doğuda mücadele edilen devletlerden biri hangisidir?', options: ['İran', 'İspanya', 'Portekiz', 'İsveç'], answer: 'İran', explain: 'Osmanlı Devleti, Duraklama Dönemi’nde doğuda İran ile mücadele etmiştir.' },
+      { id: 'q108', topic: 'duraklama', prompt: 'VARİL kodlamasının son harfi olan L hangi devleti temsil eder?', options: ['Lehistan', 'Litvanya', 'Lübnan', 'Libya'], answer: 'Lehistan', explain: 'VARİL kodlamasında L harfi Lehistan’ı temsil eder.' },
+      { id: 'q109', topic: 'duraklama', prompt: 'Aşağıdaki devletlerden hangisi Osmanlı Duraklama Dönemi’nde mücadele edilen devletler arasında yer alır?', options: ['Venedik', 'Japonya', 'Brezilya', 'Kanada'], answer: 'Venedik', explain: 'Venedik, Osmanlı Devleti’nin özellikle Akdeniz ve Girit çevresindeki mücadelelerinde karşılaştığı devletlerdendir.' },
+      { id: 'q110', topic: 'duraklama', prompt: 'Osmanlı Devleti’nin Duraklama Dönemi’nde batı sınırında mücadele ettiği devletlerden biri hangisidir?', options: ['Avusturya', 'Çin', 'Japonya', 'Hindistan'], answer: 'Avusturya', explain: 'Avusturya, Osmanlı Devleti’nin batı yönündeki önemli rakiplerinden biridir.' },
+      { id: 'q111', topic: 'duraklama', prompt: 'Osmanlı Devleti’nin Duraklama Dönemi’nde doğu yönündeki mücadeleleri hangi devletle ilişkilidir?', options: ['İran', 'Venedik', 'Lehistan', 'Avusturya'], answer: 'İran', explain: 'İran ile mücadeleler Osmanlı Devleti’nin doğu siyaseti kapsamında değerlendirilir.' },
+      { id: 'q112', topic: 'duraklama', prompt: 'Aşağıdakilerden hangisi VARİL kodlamasında yer almaz?', options: ['İspanya', 'Venedik', 'Avusturya', 'Lehistan'], answer: 'İspanya', explain: 'VARİL kodu Venedik, Avusturya, Rusya, İran ve Lehistan devletlerini hatırlatır.' },
+      { id: 'q113', topic: 'duraklama', prompt: 'VARİL kodlamasındaki devletlerin tamamı hangi dönemin savaşlarıyla ilişkilendirilmiştir?', options: ['Osmanlı Duraklama Dönemi', 'Osmanlı Kuruluş Dönemi', 'Tanzimat Dönemi', 'Millî Mücadele Dönemi'], answer: 'Osmanlı Duraklama Dönemi', explain: 'VARİL kodlaması, notlarında Osmanlı Duraklama Dönemi’nde mücadele edilen devletleri hatırlamak için kullanılmıştır.' }
     ];
 
     const STORAGE_KEY = 'nuraOzelTarihDefteri_v1';
@@ -640,7 +2213,7 @@
       return copy;
     }
     function escapeHTML(value) {
-      return String(value).replace(/[&<>'"]/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' }[char]));
+      return String(value).replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
     }
     function showToast(message) {
       const toast = document.getElementById('toast');
@@ -843,4 +2416,5 @@
     updateStatsUI();
   </script>
 </body>
+
 </html>
