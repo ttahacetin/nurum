@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f2ec" />
+  <meta name="description" content="Nur için hazırlanmış, KPSS tarih konularını ezber kodları ve mini testlerle çalışabileceğin özel bir alan." />
+  <title>Nur'a Özel — Tarih Defteri</title>
+  <style>
+    :root {
+      --paper: #f4f2ec;
+      --paper-deep: #ece9df;
+      --white: #fffefa;
+      --ink: #26372e;
+      --ink-soft: #617066;
+      --green: #536b59;
+      --green-dark: #30483a;
+      --sage: #dfe5d9;
+      --sage-light: #edf0e8;
+      --gold: #b79a65;
+      --gold-light: #eee3ce;
+      --rose: #a86f6d;
+      --line: #deded4;
+      --shadow: 0 20px 55px rgba(42, 55, 44, .075);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 15px;
+      --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 95px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-wrap: anywhere;
+    }
+    button, select { font: inherit; }
+    button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, select:focus-visible, a:focus-visible { outline: 3px solid rgba(183,154,101,.7); outline-offset: 3px; }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: #d9e2d4; color: var(--ink); }
+
+    .container { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+    .site-header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(244, 242, 236, .88);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(222, 222, 212, .78);
+    }
+    .header-inner { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark {
+      display: grid; place-items: center; flex: 0 0 42px; width: 42px; height: 42px;
+      color: var(--white); background: var(--green-dark); border-radius: 50% 50% 48% 48%;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.17);
+    }
+    .brand-mark svg { width: 21px; height: 21px; }
+    .brand-copy { display: grid; gap: 1px; line-height: 1.15; }
+    .brand-copy strong { font-size: 12px; letter-spacing: .18em; font-weight: 750; }
+    .brand-copy span { color: var(--ink-soft); font-size: 11px; letter-spacing: .04em; }
+    .nav { display: flex; align-items: center; gap: 26px; color: var(--ink-soft); font-size: 13px; }
+    .nav a { transition: color .2s ease; }
+    .nav a:hover { color: var(--green-dark); }
+    .nav-love { padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--green-dark) !important; background: rgba(255,254,250,.55); }
+
+    .hero { padding: clamp(42px, 7vw, 86px) 0 42px; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(330px, .85fr); align-items: center; gap: clamp(32px, 6vw, 82px); }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .19em; text-transform: uppercase; color: var(--green); font-weight: 750; }
+    .eyebrow::before { content: ""; width: 30px; height: 1px; background: var(--gold); display: inline-block; }
+    h1, h2, h3, p { margin-top: 0; }
+    .hero h1 { margin: 19px 0 20px; font-family: var(--serif); font-weight: 500; font-size: clamp(42px, 6.1vw, 76px); line-height: .99; letter-spacing: -.045em; max-width: 700px; }
+    .hero h1 em { color: var(--green); font-style: italic; font-weight: 400; }
+    .hero-lead { color: var(--ink-soft); max-width: 560px; font-size: clamp(15px, 1.6vw, 17px); line-height: 1.85; margin-bottom: 22px; }
+    .love-line { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--green-dark); margin: 0 0 29px; }
+    .love-line svg { color: var(--rose); flex-shrink: 0; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; }
+    .button {
+      display: inline-flex; justify-content: center; align-items: center; gap: 10px;
+      min-height: 48px; padding: 13px 20px; border: 1px solid transparent; border-radius: 999px;
+      font-size: 13px; font-weight: 700; transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--green-dark); color: white; box-shadow: 0 9px 20px rgba(48,72,58,.16); }
+    .button-primary:hover { background: #263d30; box-shadow: 0 12px 25px rgba(48,72,58,.2); }
+    .button-secondary { background: rgba(255,254,250,.62); border-color: var(--line); color: var(--ink); }
+    .button-secondary:hover { border-color: #b7c1b2; background: var(--white); }
+    .button svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .hero-art { position: relative; min-height: 420px; display: grid; place-items: center; }
+    .art-orbit { position: absolute; width: min(100%, 430px); aspect-ratio: 1; border: 1px solid #d9d8cc; border-radius: 50%; transform: rotate(-18deg); }
+    .art-orbit::before, .art-orbit::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid #e2dfd3; inset: 24px; }
+    .art-orbit::after { inset: 47px; border-style: dashed; opacity: .6; }
+    .art-dot { width: 11px; height: 11px; background: var(--gold); border-radius: 50%; position: absolute; top: 13%; right: 17%; box-shadow: 0 0 0 8px rgba(183,154,101,.12); }
+    .arch-card {
+      z-index: 1; position: relative; width: min(78%, 310px); min-height: 366px; padding: 29px 27px 24px;
+      background: linear-gradient(155deg, #e5e8dd, #d4ddcf); border: 1px solid rgba(83,107,89,.12);
+      border-radius: 160px 160px 22px 22px; box-shadow: 0 25px 70px rgba(48,72,58,.16);
+      display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center;
+      overflow: hidden;
+    }
+    .arch-card::before { content: ""; width: 168px; height: 168px; border: 1px solid rgba(83,107,89,.16); border-radius: 50%; position: absolute; top: 43px; left: calc(50% - 84px); }
+    .arch-card::after { content: ""; width: 110px; height: 110px; border: 1px solid rgba(83,107,89,.13); border-radius: 50%; position: absolute; top: 72px; left: calc(50% - 55px); }
+    .art-top, .art-center, .art-bottom { position: relative; z-index: 2; }
+    .art-top { font-size: 10px; letter-spacing: .2em; color: #526957; text-transform: uppercase; margin-top: 2px; }
+    .art-heart { width: 55px; height: 55px; display: grid; place-items: center; border-radius: 50%; background: rgba(255,254,250,.54); color: var(--rose); margin: 0 auto 9px; box-shadow: 0 4px 25px rgba(255,254,250,.25); }
+    .art-heart svg { width: 23px; height: 23px; }
+    .art-name { font-family: var(--serif); font-size: 47px; letter-spacing: -.04em; color: var(--green-dark); line-height: 1.1; }
+    .art-sub { color: #617266; font-size: 12px; margin-top: 8px; }
+    .art-bottom { border-top: 1px solid rgba(83,107,89,.2); padding-top: 14px; width: 100%; color: #526957; font-size: 11px; letter-spacing: .04em; }
+    .floating-note { position: absolute; z-index: 3; right: -4px; bottom: 46px; padding: 14px 18px; background: var(--white); border: 1px solid rgba(222,222,212,.9); box-shadow: var(--shadow); border-radius: 14px; transform: rotate(3deg); font-family: var(--serif); font-size: 17px; color: var(--green-dark); }
+    .floating-note span { color: var(--rose); }
+
+    .soft-divider { border: 0; border-top: 1px solid var(--line); margin: 0; }
+    .stats-wrap { padding: 15px 0 54px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); background: rgba(255,254,250,.62); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+    .stat { padding: 19px 22px; display: flex; align-items: center; gap: 13px; min-width: 0; }
+    .stat + .stat { border-left: 1px solid var(--line); }
+    .stat-icon { display: grid; place-items: center; width: 39px; height: 39px; border-radius: 12px; background: var(--sage-light); color: var(--green); flex-shrink: 0; }
+    .stat-icon svg { width: 18px; height: 18px; }
+    .stat-copy { min-width: 0; }
+    .stat-copy strong { display: block; font-family: var(--serif); font-weight: 500; font-size: 25px; line-height: 1.1; letter-spacing: -.02em; }
+    .stat-copy span { color: var(--ink-soft); font-size: 11px; letter-spacing: .035em; }
+
+    .section { padding: 46px 0 72px; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 22px; margin-bottom: 27px; }
+    .section-heading h2 { margin: 11px 0 7px; font-family: var(--serif); font-weight: 500; font-size: clamp(32px, 4vw, 47px); letter-spacing: -.035em; line-height: 1.08; }
+    .section-heading p { color: var(--ink-soft); margin-bottom: 0; max-width: 590px; font-size: 14px; line-height: 1.75; }
+    .section-index { align-self: start; font-family: var(--serif); font-size: 18px; color: var(--gold); }
+
+    .workspace-shell { border-radius: var(--radius-xl); border: 1px solid var(--line); background: rgba(255,254,250,.72); box-shadow: var(--shadow); overflow: hidden; }
+    .workspace-top { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px; padding: 26px 28px 23px; border-bottom: 1px solid var(--line); background: rgba(255,254,250,.55); }
+    .workspace-top h3 { margin: 0 0 4px; font-family: var(--serif); font-size: 25px; font-weight: 500; letter-spacing: -.02em; }
+    .workspace-top p { margin: 0; color: var(--ink-soft); font-size: 12px; }
+    .live-label { color: var(--green); background: var(--sage-light); border: 1px solid #dbe2d5; border-radius: 999px; padding: 8px 11px; text-transform: uppercase; font-size: 10px; letter-spacing: .12em; font-weight: 800; white-space: nowrap; }
+    .quiz-setup { display: grid; grid-template-columns: 1.3fr .75fr auto auto; align-items: end; gap: 12px; padding: 21px 28px; border-bottom: 1px solid var(--line); }
+    .field { display: grid; gap: 7px; min-width: 0; }
+    .field label { font-size: 11px; font-weight: 750; letter-spacing: .04em; color: var(--ink-soft); }
+    .field select { width: 100%; min-height: 45px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); color: var(--ink); padding: 10px 35px 10px 13px; outline-offset: 2px; }
+    .quiz-setup .button { min-height: 45px; padding-inline: 15px; white-space: nowrap; }
+    .quiz-area { padding: 28px; min-height: 290px; }
+    .quiz-empty { min-height: 235px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 12px; }
+    .empty-symbol { width: 58px; height: 58px; display: grid; place-items: center; color: var(--green); border-radius: 50%; background: var(--sage-light); margin-bottom: 13px; }
+    .empty-symbol svg { width: 26px; height: 26px; }
+    .quiz-empty h4 { margin: 0 0 7px; font-family: var(--serif); font-size: 26px; font-weight: 500; }
+    .quiz-empty p { color: var(--ink-soft); font-size: 13px; max-width: 400px; margin: 0; }
+    .quiz-topline { display: flex; align-items: center; justify-content: space-between; gap: 14px; color: var(--ink-soft); font-size: 12px; margin-bottom: 12px; }
+    .topic-pill { display: inline-flex; max-width: 65%; color: var(--green-dark); background: var(--sage-light); border-radius: 999px; padding: 6px 10px; font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .progress-track { height: 4px; background: #e8e8df; border-radius: 999px; overflow: hidden; margin-bottom: 28px; }
+    .progress-fill { height: 100%; width: 0; background: var(--green); border-radius: inherit; transition: width .3s ease; }
+    .question-title { font-family: var(--serif); font-weight: 500; font-size: clamp(22px, 3vw, 31px); line-height: 1.25; letter-spacing: -.025em; max-width: 780px; margin: 0 0 22px; }
+    .answer-list { display: grid; gap: 10px; }
+    .answer-option { border: 1px solid var(--line); border-radius: 13px; padding: 13px 15px; display: flex; align-items: flex-start; gap: 12px; width: 100%; text-align: left; background: var(--white); color: var(--ink); transition: border-color .15s ease, background .15s ease, transform .15s ease; }
+    .answer-option:hover:not(:disabled) { transform: translateY(-1px); border-color: #aebda9; }
+    .answer-letter { display: grid; place-items: center; flex: 0 0 26px; width: 26px; height: 26px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink-soft); font-size: 11px; font-weight: 800; }
+    .answer-text { flex: 1; font-size: 13px; line-height: 1.55; padding-top: 2px; }
+    .answer-option.is-correct { border-color: #91ae91; background: #edf5ea; }
+    .answer-option.is-correct .answer-letter { background: #d7e7d3; border-color: #b8d0b5; color: #315d39; }
+    .answer-option.is-wrong { border-color: #d9a9a2; background: #fff0ed; }
+    .answer-option.is-wrong .answer-letter { background: #f7ddda; border-color: #ebc3be; color: #8d4e47; }
+    .answer-option:disabled { cursor: default; }
+    .feedback { display: flex; align-items: flex-start; gap: 10px; padding: 14px 15px; border-radius: 13px; margin-top: 15px; background: var(--sage-light); color: var(--green-dark); font-size: 12px; line-height: 1.65; }
+    .feedback.wrong { background: #fbefeb; color: #784741; }
+    .feedback strong { display: block; margin-bottom: 2px; }
+    .feedback svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; }
+    .quiz-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 24px; padding-top: 19px; border-top: 1px solid var(--line); }
+    .quiz-controls .button { min-height: 43px; padding: 10px 16px; }
+    .button:disabled { opacity: .42; cursor: not-allowed; transform: none; box-shadow: none; }
+    .question-counter { color: var(--ink-soft); font-size: 11px; text-align: center; }
+    .result-screen { max-width: 720px; margin-inline: auto; text-align: center; padding: 6px 0 10px; }
+    .result-ring { width: 112px; height: 112px; border-radius: 50%; margin: 0 auto 17px; display: grid; place-items: center; background: conic-gradient(var(--green) var(--score, 0%), #e4e7df 0); position: relative; }
+    .result-ring::before { content: ""; position: absolute; inset: 7px; border-radius: 50%; background: var(--white); }
+    .result-ring strong { z-index: 1; font-family: var(--serif); font-size: 31px; font-weight: 500; }
+    .result-screen h3 { margin: 0 0 8px; font-family: var(--serif); font-size: 31px; font-weight: 500; }
+    .result-screen > p { margin: 0 auto 18px; color: var(--ink-soft); font-size: 13px; max-width: 470px; }
+    .result-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; margin: 20px 0; }
+    .result-stat { padding: 12px 8px; border-radius: 12px; background: var(--sage-light); }
+    .result-stat strong { display: block; font-size: 20px; font-family: var(--serif); font-weight: 500; }
+    .result-stat span { display: block; font-size: 10px; color: var(--ink-soft); }
+    .result-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+    .wrong-review { margin-top: 24px; text-align: left; border-top: 1px solid var(--line); padding-top: 20px; }
+    .wrong-review h4 { font-family: var(--serif); font-size: 21px; font-weight: 500; margin: 0 0 10px; }
+    .wrong-item { padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .wrong-item strong { display: block; font-size: 12px; margin-bottom: 4px; }
+    .wrong-item span { font-size: 12px; color: var(--ink-soft); }
+
+    .memory-section { background: #ecefe6; border-top: 1px solid #e2e5db; border-bottom: 1px solid #e2e5db; }
+    .memory-section .section { padding-top: 68px; padding-bottom: 74px; }
+    .memory-head-actions { display: flex; gap: 8px; align-items: center; }
+    .tiny-note { font-size: 11px; color: var(--ink-soft); }
+    .memory-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 15px; }
+    .memory-card { min-width: 0; border: 1px solid #d9ded2; border-radius: 19px; background: rgba(255,254,250,.78); padding: 20px; display: flex; flex-direction: column; min-height: 226px; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .memory-card:hover { transform: translateY(-3px); box-shadow: 0 13px 28px rgba(42,55,44,.07); border-color: #bdc9b8; }
+    .memory-card.known { border-color: #a9bba4; background: #f5f8f1; }
+    .memory-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 9px; }
+    .memory-num { color: #9a9e8f; font-size: 10px; letter-spacing: .12em; }
+    .known-mark { color: var(--green); font-size: 10px; font-weight: 800; white-space: nowrap; }
+    .memory-card h3 { margin: 12px 0 8px; font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.15; letter-spacing: -.02em; }
+    .mnemonic { display: inline-flex; align-self: flex-start; padding: 5px 9px; background: var(--gold-light); color: #665334; border-radius: 7px; font-size: 10px; font-weight: 850; letter-spacing: .1em; }
+    .memory-summary { font-size: 12px; line-height: 1.7; color: var(--ink-soft); margin: 13px 0 16px; }
+    .memory-details { display: none; color: var(--ink); background: #f0f2eb; border-radius: 12px; padding: 13px; margin: 0 0 14px; font-size: 12px; line-height: 1.75; white-space: pre-line; }
+    .memory-card.expanded .memory-details { display: block; }
+    .memory-card-bottom { display: flex; justify-content: space-between; align-items: center; gap: 8px; border-top: 1px solid #e4e5dc; padding-top: 13px; margin-top: auto; }
+    .text-button { padding: 4px 0; border: 0; background: transparent; color: var(--green-dark); font-size: 11px; font-weight: 800; }
+    .text-button:hover { color: var(--rose); }
+    .study-all { display: block; margin: 22px auto 0; }
+
+    .love-section { padding: 72px 0 83px; }
+    .love-panel { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; border-radius: var(--radius-xl); padding: clamp(26px, 5vw, 54px); background: var(--green-dark); color: #f9f7ef; overflow: hidden; }
+    .love-panel::before { content: ""; position: absolute; width: 400px; height: 400px; border: 1px solid rgba(236,227,206,.16); border-radius: 50%; right: -90px; top: -190px; }
+    .love-panel::after { content: ""; position: absolute; width: 300px; height: 300px; border: 1px solid rgba(236,227,206,.13); border-radius: 50%; right: -38px; top: -139px; }
+    .love-copy, .love-note-card { z-index: 1; position: relative; }
+    .love-panel .eyebrow { color: #d6c69f; }
+    .love-panel h2 { font-family: var(--serif); font-size: clamp(34px, 4.5vw, 53px); font-weight: 400; letter-spacing: -.035em; line-height: 1.08; margin: 15px 0 18px; max-width: 600px; }
+    .love-panel h2 em { color: #d7c49b; }
+    .love-panel p { max-width: 500px; color: rgba(249,247,239,.75); font-size: 13px; line-height: 1.9; margin-bottom: 0; }
+    .love-note-card { border-radius: 18px; background: #f3efe4; color: var(--ink); padding: 25px; transform: rotate(1deg); box-shadow: 0 15px 45px rgba(0,0,0,.12); }
+    .note-label { font-size: 10px; text-transform: uppercase; letter-spacing: .16em; color: #7d846f; font-weight: 800; }
+    .note-message { min-height: 94px; display: flex; align-items: center; font-family: var(--serif); font-size: clamp(21px, 2.5vw, 28px); line-height: 1.3; margin: 15px 0 20px; letter-spacing: -.02em; }
+    .note-sign { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid #dcd9cc; padding-top: 14px; color: #747b6e; font-size: 11px; }
+    .note-sign svg { width: 16px; height: 16px; color: var(--rose); }
+    .note-refresh { border: 0; background: transparent; color: var(--green-dark); font-size: 11px; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+
+    .site-footer { border-top: 1px solid var(--line); padding: 22px 0 calc(24px + env(safe-area-inset-bottom)); color: var(--ink-soft); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; font-size: 11px; }
+    .footer-sign { color: var(--green-dark); display: flex; align-items: center; gap: 7px; }
+    .footer-sign svg { width: 14px; height: 14px; color: var(--rose); }
+    .toast { position: fixed; bottom: max(20px, env(safe-area-inset-bottom)); left: 50%; transform: translate(-50%, 20px); z-index: 40; padding: 12px 17px; border-radius: 999px; background: var(--green-dark); color: #fff; font-size: 12px; box-shadow: var(--shadow); opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; max-width: calc(100% - 28px); text-align: center; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .noscript { margin: 20px; padding: 15px; background: #fff1e9; border-radius: 12px; color: #6d382c; }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: minmax(0,1fr) minmax(270px,.75fr); gap: 22px; }
+      .hero-art { min-height: 365px; }
+      .arch-card { min-height: 330px; }
+      .quiz-setup { grid-template-columns: 1fr 1fr; }
+      .memory-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .love-panel { gap: 26px; }
+    }
+    @media (max-width: 650px) {
+      html { scroll-padding-top: 78px; }
+      .container { width: min(100% - 30px, 560px); }
+      .header-inner { min-height: 68px; gap: 10px; }
+      .brand { gap: 9px; }
+      .brand-mark { width: 37px; height: 37px; flex-basis: 37px; }
+      .brand-copy strong { font-size: 10px; letter-spacing: .15em; }
+      .brand-copy span { font-size: 10px; }
+      .nav { gap: 12px; font-size: 11px; }
+      .nav a:not(.nav-love) { display: none; }
+      .nav-love { padding: 9px 11px; font-size: 10px; }
+      .hero { padding: 35px 0 22px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 15px; }
+      .hero h1 { font-size: clamp(43px, 12vw, 62px); margin-top: 15px; }
+      .hero-lead { font-size: 14px; line-height: 1.78; margin-bottom: 16px; }
+      .love-line { font-size: 12px; margin-bottom: 22px; }
+      .hero-actions { display: grid; grid-template-columns: 1fr 1fr; }
+      .hero-actions .button { padding-inline: 12px; font-size: 12px; min-height: 46px; }
+      .hero-art { min-height: 305px; margin-top: 2px; }
+      .art-orbit { width: 290px; max-width: 90%; }
+      .arch-card { width: 220px; min-height: 282px; padding: 22px 19px 18px; }
+      .arch-card::before { width: 140px; height: 140px; left: calc(50% - 70px); top: 38px; }
+      .arch-card::after { width: 95px; height: 95px; left: calc(50% - 47px); top: 61px; }
+      .art-heart { width: 43px; height: 43px; margin-bottom: 7px; }
+      .art-name { font-size: 40px; }
+      .art-sub { font-size: 11px; }
+      .floating-note { right: calc(50% - 142px); bottom: 12px; font-size: 14px; padding: 11px 13px; }
+      .stats-wrap { padding: 10px 0 35px; }
+      .stats { border-radius: 14px; }
+      .stat { padding: 13px 9px; display: block; text-align: center; }
+      .stat-icon { width: 31px; height: 31px; margin: 0 auto 7px; border-radius: 10px; }
+      .stat-icon svg { width: 15px; height: 15px; }
+      .stat-copy strong { font-size: 22px; }
+      .stat-copy span { font-size: 9px; line-height: 1.3; display: block; }
+      .section { padding: 35px 0 50px; }
+      .section-heading { align-items: start; margin-bottom: 20px; gap: 10px; }
+      .section-heading h2 { font-size: 35px; }
+      .section-heading p { font-size: 12px; }
+      .section-index { font-size: 14px; }
+      .workspace-shell { border-radius: 20px; }
+      .workspace-top { padding: 20px 17px 17px; gap: 10px; grid-template-columns: 1fr; }
+      .workspace-top h3 { font-size: 23px; }
+      .live-label { justify-self: start; font-size: 9px; }
+      .quiz-setup { padding: 16px 17px; grid-template-columns: 1fr 1fr; gap: 11px; }
+      .field label { font-size: 10px; }
+      .field select { min-height: 44px; padding-left: 10px; font-size: 12px; }
+      .quiz-setup .button { grid-column: span 1; width: 100%; padding-inline: 8px; font-size: 11px; }
+      .quiz-area { padding: 19px 16px; min-height: 270px; }
+      .quiz-empty { min-height: 225px; }
+      .quiz-empty h4 { font-size: 24px; }
+      .quiz-empty p { font-size: 12px; }
+      .quiz-topline { font-size: 10px; }
+      .topic-pill { max-width: 70%; font-size: 9px; }
+      .progress-track { margin-bottom: 22px; }
+      .question-title { font-size: 24px; margin-bottom: 18px; }
+      .answer-option { padding: 11px; gap: 9px; border-radius: 12px; }
+      .answer-letter { width: 24px; height: 24px; flex-basis: 24px; }
+      .answer-text { font-size: 12px; }
+      .feedback { font-size: 11px; padding: 12px; }
+      .quiz-controls { margin-top: 18px; padding-top: 15px; gap: 7px; }
+      .quiz-controls .button { min-height: 40px; padding: 9px 11px; font-size: 11px; }
+      .question-counter { font-size: 10px; }
+      .result-ring { width: 96px; height: 96px; }
+      .result-ring strong { font-size: 27px; }
+      .result-screen h3 { font-size: 28px; }
+      .result-stats { gap: 6px; }
+      .result-stat span { font-size: 9px; }
+      .memory-section .section { padding: 46px 0 52px; }
+      .memory-grid { grid-template-columns: 1fr; gap: 11px; }
+      .memory-card { min-height: unset; padding: 17px; border-radius: 16px; }
+      .memory-card h3 { font-size: 21px; }
+      .memory-summary { margin-bottom: 12px; }
+      .memory-card-bottom { padding-top: 10px; }
+      .love-section { padding: 48px 0 54px; }
+      .love-panel { grid-template-columns: 1fr; gap: 24px; border-radius: 23px; padding: 27px 21px; }
+      .love-panel h2 { font-size: 38px; }
+      .love-panel p { font-size: 12px; }
+      .love-note-card { padding: 20px; transform: rotate(.5deg); }
+      .note-message { min-height: 84px; font-size: 24px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+    @media (max-width: 365px) {
+      .container { width: calc(100% - 24px); }
+      .brand-copy span { display: none; }
+      .hero-actions { grid-template-columns: 1fr; }
+      .quiz-setup { grid-template-columns: 1fr; }
+      .quiz-setup .button { grid-column: auto; }
+      .stat { padding-inline: 5px; }
+      .stat-copy span { font-size: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#baslangic" aria-label="Nur'a özel tarih defteri, ana sayfa">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="brand-copy"><strong>NUR'UMA ÖZEL</strong><span> </span></span>
+      </a>
+      <nav class="nav" aria-label="Ana menü">
+        <a href="#sinav">Test alanı</a>
+        <a href="#kodlar">Ezber kodları</a>
+        <a class="nav-love" href="#sana-ozel">Nur, seni çok seviyorum  ♡</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="baslangic">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Sana ait, sana özel</span>
+          <h1>Her şeyden<br />daha değerlisin<br /><em>Nur.</em></h1>
+          <p class="hero-lead">Aşkım zaten hemen hepsini ezberliyon çok zekisin bunlarıda yaparsın</p>
+          <p class="love-line">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+           
+          </p>
+          <div class="hero-actions">
+            <button class="button button-primary" id="heroStart" type="button">Teste başlayalım <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <a class="button button-secondary" href="#kodlar">Ezber kodlarını gör <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14m-6-6 6 6 6-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Nur için hazırlanmış özel çalışma kartı">
+          <div class="art-orbit" aria-hidden="true"></div><span class="art-dot" aria-hidden="true"></span>
+          <div class="arch-card">
+            <div class="art-top">çoook güzelsin</div>
+            <div class="art-center">
+              <div class="art-heart" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="art-name">Nur</div>
+              <div class="art-sub">Çok akıllısın aşkım</div>
+            </div>
+            
+          </div>
+          <div class="floating-note">Çok zekiisin aşkım<span>♡</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container"><hr class="soft-divider" /></div>
+
+    <section class="stats-wrap" aria-label="Çalışma istatistikleri">
+      <div class="container stats">
+        <div class="stat">
+          <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8 4h8M9 3h6v3H9zM6 5H4v16h16V5h-2M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="stat-copy"><strong id="statSolved">0</strong><span>Çözülen soru</span></span>
+        </div>
+        <div class="stat">
+          <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
+          <span class="stat-copy"><strong id="statBest">—</strong><span>En iyi başarı</span></span>
+        </div>
+        <div class="stat">
+          <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5ZM4 6h13m-7 0v5l2-1.3L14 11V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="stat-copy"><strong id="statKnown">0</strong><span>Öğrenilen kod</span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sinav">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="eyebrow">01 / Kendini dene</span><h2>Bugünün çalışma alanı</h2><p>Konunu seç, soru sayısını belirle ve başlayalım. Her cevabın ardından açıklamayı görebilir, yanlışlarını daha sonra yeniden çözebilirsin.</p></div>
+          <span class="section-index">✳</span>
+        </div>
+        <div class="workspace-shell">
+          <div class="workspace-top">
+            <div><h3>Test.</p></div>
+            <span class="live-label">Nur'un çalışma masası</span>
+          </div>
+          <div class="quiz-setup">
+            <div class="field"><label for="topicFilter">KONU SEÇİMİ</label><select id="topicFilter"><option value="all">Tüm konular</option></select></div>
+            <div class="field"><label for="questionCount">SORU SAYISI</label><select id="questionCount"><option value="10">10 soru</option><option value="20">20 soru</option><option value="all">Tüm sorular</option></select></div>
+            <button class="button button-primary" id="startQuiz" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 10 7-10 7V5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> Teste başla</button>
+            <button class="button button-secondary" id="wrongOnly" type="button" title="Daha önce yanlış yaptığın sorular">Yanlışlarım</button>
+          </div>
+          <div class="quiz-area" id="quizArea" aria-live="polite">
+            <div class="quiz-empty">
+              <span class="empty-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H20v17H7.5A2.5 2.5 0 0 0 5 21.5v-17ZM5 5h12m-8 0v5l2-1.4L13 10V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <h4>Hazır mısın aşkım.</h4><p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="memory-section" id="kodlar">
+      <div class="container section">
+        <div class="section-heading">
+          <div><span class="eyebrow">02 / Hatırla ve pekiştir</span><h2>Ezber kodları kütüphanesi</h2><p>Notlarındaki kodlar tek yerde. Bir kartı açıp bilgileri tekrar et; öğrendiğinde kendin için işaretle. İşaretlerin bu cihazda saklanır.</p></div>
+          <span class="section-index">14 kart</span>
+        </div>
+        <div class="memory-grid" id="memoryGrid"></div>
+        <button class="button button-secondary study-all" id="expandAll" type="button">Tüm kartları aç</button>
+      </div>
+    </section>
+
+    <section class="love-section" id="sana-ozel">
+      <div class="container">
+        <div class="love-panel">
+          <div class="love-copy">
+            <span class="eyebrow">Küçük bir hatırlatma</span>
+            <h2>Nur, Seniiiiiii<br /><em>çok seviyoruuum.</em></h2>
+            
+          </div>
+          <div class="love-note-card">
+            <div class="note-label">Nur</div>
+            <div class="note-message" id="noteMessage">İyiki varsın aşkım.</div>
+            <div class="note-sign"><span>Sevgiyle, hep senin tarafında</span><button class="note-refresh" id="newNote" type="button">Bir not daha ↗</button><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>Nur'a özel hazırlandı </span>
+      <span class="footer-sign">Nur, seni seviyorum <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20s-7.4-4.35-8.7-8.45C1.9 7.1 7.3 4.2 12 9c4.7-4.8 10.1-1.9 8.7 2.55C19.4 15.65 12 20 12 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </div>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript><p class="noscript">Test ve kart özelliklerini kullanabilmek için tarayıcında JavaScript açık olmalı.</p></noscript>
+
+  <script>
+    // Nur'a özel KPSS tarih çalışma alanı. Harici kütüphane veya sunucu gerekmez.
+    const topics = [
+      {
+        id: 'fronts', title: 'Atatürk’ün savaştığı cepheler', code: 'ÇAY KAHVE SU',
+        summary: 'Üç cepheyi bir içecek sıralamasıyla hatırla.',
+        details: 'ÇAY → Çanakkale\nKAHVE → Kafkas\nSU → Suriye',
+        items: ['Çanakkale', 'Kafkas', 'Suriye']
+      },
+      {
+        id: 'vilayet', title: 'Vilayet-i Sitte illeri', code: 'BESVED',
+        summary: 'Altı vilayeti harf sırasıyla hatırla.',
+        details: 'B → Bitlis\nE → Erzurum\nS → Sivas\nV → Van\nE → Elazığ\nD → Diyarbakır',
+        items: ['Bitlis', 'Erzurum', 'Sivas', 'Van', 'Elazığ', 'Diyarbakır']
+      },
+      {
+        id: 'opec', title: 'OPEC kurucu üyeleri', code: 'VİSKİ',
+        summary: '1960 Bağdat Konferansı’ndaki beş kurucu üyeyi hatırla.',
+        details: 'V → Venezuela\nİ → İran\nS → Suudi Arabistan\nK → Kuveyt\nİ → Irak\n\n1960 yılında Bağdat Konferansı’nda bir araya geldiler.',
+        items: ['Venezuela', 'İran', 'Suudi Arabistan', 'Kuveyt', 'Irak']
+      },
+      {
+        id: 'gerileme', title: 'Gerileme dönemi padişahları', code: '31313 AMMAS',
+        summary: 'Notlarındaki numara sırasını takip et.',
+        details: '3 → III. Ahmet\n1 → I. Mahmut\n3 → III. Mustafa\n1 → I. Abdülhamit\n3 → III. Selim\n\nBu kart, gönderdiğin nottaki listeye göre hazırlandı.',
+        items: ['III. Ahmet', 'I. Mahmut', 'III. Mustafa', 'I. Abdülhamit', 'III. Selim'],
+        note: 'Bu bölüm gönderdiğin listedeki padişahları korur. Ders kaynağındaki dönem sıralamasıyla ayrıca karşılaştırman iyi olur.'
+      },
+      {
+        id: 'balkan', title: 'I. Balkan Savaşı sonrası kaybedilen yerler', code: 'TEMASSSSSS',
+        summary: 'Notlarında geçen yerleri tek listede tekrar et.',
+        details: 'TE → Trakya\nM → Makedonya\nA → Arnavutluk\nS → Selanik\nS → Ege adaları\n\nKodlamanın açılım sırası, notlarına göre düzenlendi.',
+        items: ['Trakya', 'Ege adaları', 'Makedonya', 'Arnavutluk', 'Selanik']
+      },
+      {
+        id: 'yesilirmak', title: 'Yeşilırmak Havzası Projesi', code: 'SAÇ TOKASI',
+        summary: 'Dört ili bir arada hatırla.',
+        details: 'S → Samsun\nA → Amasya\nÇ → Çorum\nTOKAT → Tokat',
+        items: ['Samsun', 'Amasya', 'Çorum', 'Tokat']
+      },
+      {
+        id: 'inonu', title: 'I. İnönü Muharebesi sonuçları', code: 'MİLAT',
+        summary: 'Beş sonucu kelimenin harfleriyle hatırla.',
+        details: 'M → Moskova Antlaşması\nİ → İstiklâl Marşı’nın kabulü\nL → Londra Konferansı\nA → Afganistan ile dostluk antlaşması\nT → Teşkilât-ı Esasiye’nin kabulü',
+        items: ['Moskova Antlaşması', 'İstiklâl Marşı’nın kabulü', 'Londra Konferansı', 'Afganistan ile dostluk antlaşması', 'Teşkilât-ı Esasiye']
+      },
+      {
+        id: 'ikinci-mesrutiyet', title: 'II. Meşrutiyet aydınları', code: 'HATİCE',
+        summary: 'Notlarındaki isimlerin baş harflerinden oluşur.',
+        details: 'H → Hasan Tosun\nA → Abdullah Cevdet\nT → Talat Paşa\nİ → İsmail Canpolat\nC → Cemal Paşa\nE → Enver Paşa',
+        items: ['Hasan Tosun', 'Abdullah Cevdet', 'Talat Paşa', 'İsmail Canpolat', 'Cemal Paşa', 'Enver Paşa'],
+        note: 'İsimleri öğretmeninin veya kullandığın KPSS kaynağındaki listeyle eşleştirerek çalış.'
+      },
+      {
+        id: 'birinci-mesrutiyet', title: 'I. Meşrutiyet aydınları', code: 'NAMAZ',
+        summary: 'Beş ismi kolayca hatırlatır.',
+        details: 'N → Namık Kemal\nA → Ahmet Mithat Efendi\nM → Mustafa Fazıl Paşa\nA → Ali Suavi\nZ → Ziya Paşa',
+        items: ['Namık Kemal', 'Ahmet Mithat Efendi', 'Mustafa Fazıl Paşa', 'Ali Suavi', 'Ziya Paşa']
+      },
+      {
+        id: 'tanzimat', title: 'Tanzimat Fermanı’nın içeriği', code: 'EVRAK',
+        summary: 'Beş başlığı EVRAK koduyla tekrar et.',
+        details: 'E → Eşitlik\nV → Vergi\nR → Rüşvet ve iltimasın önlenmesi\nA → Askerlik\nK → Can, mal ve namus güvenliğinin korunması',
+        items: ['Eşitlik', 'Vergi', 'Rüşvet ve iltimasın önlenmesi', 'Askerlik', 'Can, mal ve namus güvenliği']
+      },
+      {
+        id: 'antlasmalar', title: 'I. Dünya Savaşı sonrası barış antlaşmaları', code: 'SON VİTES OBAMA',
+        summary: 'Devletleri imzaladıkları antlaşmalarla eşleştir.',
+        details: 'Osmanlı → Sevr\nBulgaristan → Nöyyi (Neuilly)\nAlmanya → Versay\nMacaristan → Triyanon (Trianon)\nAvusturya → Sen Jermen (Saint-Germain)',
+        items: ['Osmanlı — Sevr', 'Bulgaristan — Nöyyi', 'Almanya — Versay', 'Macaristan — Triyanon', 'Avusturya — Sen Jermen']
+      },
+      {
+        id: 'kadin-haklari', title: 'Kadınlara verilen siyasi haklar', code: 'B-M-M',
+        summary: 'Hakları tarih sırasıyla hatırla.',
+        details: 'B → Belediye seçimlerine katılma (1930)\nM → Muhtarlık ve köy ihtiyar heyeti seçimleri (1933)\nM → Milletvekili seçme ve seçilme hakkı (1934)\n\nGönderdiğin notta kod “B-M-V / Belediye-Milletvekili-Vali” şeklinde. “Vali” ifadesi muhtemelen not hatası; sınav kaynağınla karşılaştır.',
+        items: ['Belediye seçimleri (1930)', 'Muhtarlık / köy ihtiyar heyeti (1933)', 'Milletvekili seçme ve seçilme hakkı (1934)'],
+        note: 'Notundaki “Vali” bilgisini kontrol etmeni öneririm. Yaygın tarih sıralaması belediye, muhtarlık ve milletvekili hakları şeklindedir.'
+      },
+      {
+        id: 'kongreler', title: 'Atatürk’ün katıldığı kongreler', code: 'APSE',
+        summary: 'Gönderdiğin dört adı kısaltmayla hatırla.',
+        details: 'A → Afyon\nP → Pozantı\nS → Sivas\nE → Erzurum',
+        items: ['Afyon', 'Pozantı', 'Sivas', 'Erzurum'],
+        note: 'Kongre listesini kullandığın ders notuyla birlikte tekrar et.'
+      },
+      {
+        id: 'duraklama', title: 'Osmanlı Duraklama Devri’nde savaşılan devletler', code: 'VARİL',
+        summary: 'Beş devleti VARİL ile hatırla.',
+        details: 'V → Venedik\nA → Avusturya\nR → Rusya\nİ → İran\nL → Lehistan',
+        items: ['Venedik', 'Avusturya', 'Rusya', 'İran', 'Lehistan']
+      }
+    ];
+
+    const questions = [
+      { id:'q01', topic:'fronts', prompt:'Mustafa Kemal’in I. Dünya Savaşı’nda görev aldığı cepheler hangi seçenekte doğru verilmiştir?', options:['Çanakkale, Kafkas ve Suriye','Yemen, Hicaz ve Galiçya','Kanal, Irak ve Romanya','Trablusgarp, Balkan ve Kırım'], answer:'Çanakkale, Kafkas ve Suriye', explain:'Mustafa Kemal, I. Dünya Savaşı sırasında Çanakkale, Kafkas ve Suriye cephelerinde görev yapmıştır.' },
+      { id:'q02', topic:'fronts', prompt:'Mustafa Kemal’in I. Dünya Savaşı’nda görev yaptığı doğu cephesi hangisidir?', options:['Kafkas Cephesi','Kanal Cephesi','Hicaz Cephesi','Galiçya Cephesi'], answer:'Kafkas Cephesi', explain:'Mustafa Kemal, Kafkas Cephesi’nde Rus kuvvetlerine karşı görev yapmıştır.' },
+      { id:'q03', topic:'vilayet', prompt:'Vilayet-i Sitte aşağıdaki illerin hangisinden oluşur?', options:['Bitlis, Erzurum, Sivas, Van, Elazığ, Diyarbakır','Samsun, Amasya, Çorum, Tokat, Yozgat, Ordu','Edirne, Selanik, Manastır, Üsküp, Kosova, Yanya','Ankara, Konya, Kayseri, Sivas, Yozgat, Niğde'], answer:'Bitlis, Erzurum, Sivas, Van, Elazığ, Diyarbakır', explain:'Vilayet-i Sitte; Bitlis, Erzurum, Sivas, Van, Elazığ ve Diyarbakır vilayetlerini ifade eder.' },
+      { id:'q04', topic:'vilayet', prompt:'Aşağıdaki illerden hangisi Vilayet-i Sitte içinde yer almaz?', options:['Samsun','Bitlis','Erzurum','Van'], answer:'Samsun', explain:'Vilayet-i Sitte içinde Bitlis, Erzurum, Sivas, Van, Elazığ ve Diyarbakır bulunur; Samsun bu grupta yer almaz.' },
+      { id:'q05', topic:'opec', prompt:'OPEC’in 1960 yılında kurucu üyeleri arasında yer alan ülkeler hangileridir?', options:['Venezuela, İran, Suudi Arabistan, Kuveyt, Irak','Türkiye, İran, Mısır, Irak, Suriye','Venezuela, Brezilya, Meksika, Kuveyt, Irak','İran, Katar, BAE, Bahreyn, Suudi Arabistan'], answer:'Venezuela, İran, Suudi Arabistan, Kuveyt, Irak', explain:'OPEC’in beş kurucu üyesi Venezuela, İran, Suudi Arabistan, Kuveyt ve Irak’tır.' },
+      { id:'q06', topic:'opec', prompt:'OPEC hangi yıl kurulmuştur?', options:['1923','1945','1960','1973'], answer:'1960', explain:'OPEC, 1960 yılında Bağdat Konferansı sırasında kuruldu.' },
+      { id:'q07', topic:'gerileme', prompt:'Lale Devri hangi Osmanlı padişahının döneminde yaşanmıştır?', options:['III. Ahmet','I. Mahmut','II. Mahmut','IV. Murat'], answer:'III. Ahmet', explain:'Lale Devri, III. Ahmet döneminde yaşanmıştır.' },
+      { id:'q08', topic:'gerileme', prompt:'Nizam-ı Cedid yeniliklerini başlatan Osmanlı padişahı kimdir?', options:['III. Selim','I. Mahmut','III. Ahmet','I. Abdülhamit'], answer:'III. Selim', explain:'Nizam-ı Cedid yenilikleri III. Selim döneminde başlatılmıştır.' },
+      { id:'q09', topic:'balkan', prompt:'I. Balkan Savaşı sonrasında Osmanlı Devleti’nin kaybettiği yerler aşağıdakilerden hangisinde birlikte verilmiştir?', options:['Trakya, Ege adaları, Makedonya, Arnavutluk, Selanik','Kars, Ardahan, Batum, Artvin, Sarıkamış','Musul, Kerkük, Halep, Şam, Beyrut','Kıbrıs, Girit, Rodos, On İki Ada, Malta'], answer:'Trakya, Ege adaları, Makedonya, Arnavutluk, Selanik', explain:'Notlarında I. Balkan Savaşı sonrasında kaybedilen yerler arasında Trakya, Ege adaları, Makedonya, Arnavutluk ve Selanik yer alıyor.' },
+      { id:'q10', topic:'balkan', prompt:'I. Balkan Savaşı sırasında bağımsızlığını ilan ederek Osmanlı Devleti’nden ayrılan devlet hangisidir?', options:['Arnavutluk','Romanya','Yunanistan','Sırbistan'], answer:'Arnavutluk', explain:'Arnavutluk, 1912’de bağımsızlığını ilan etti.' },
+      { id:'q11', topic:'yesilirmak', prompt:'Yeşilırmak Havzası Projesi kapsamındaki iller hangileridir?', options:['Samsun, Amasya, Çorum, Tokat','Adana, Mersin, Hatay, Osmaniye','Diyarbakır, Batman, Siirt, Şırnak','İzmir, Manisa, Aydın, Denizli'], answer:'Samsun, Amasya, Çorum, Tokat', explain:'Yeşilırmak Havzası Projesi Samsun, Amasya, Çorum ve Tokat illerini kapsar.' },
+      { id:'q12', topic:'yesilirmak', prompt:'Aşağıdaki illerden hangisi Yeşilırmak Havzası Projesi kapsamındadır?', options:['Amasya','Adana','Diyarbakır','İzmir'], answer:'Amasya', explain:'Amasya, Samsun, Çorum ve Tokat ile birlikte proje kapsamındadır.' },
+      { id:'q13', topic:'inonu', prompt:'I. İnönü Muharebesi’nin ardından TBMM Hükûmeti hangi konferansa davet edilmiştir?', options:['Londra Konferansı','Lozan Konferansı','Paris Barış Konferansı','Berlin Konferansı'], answer:'Londra Konferansı', explain:'I. İnönü Muharebesi’nden sonra TBMM Hükûmeti Londra Konferansı’na davet edildi.' },
+      { id:'q14', topic:'inonu', prompt:'I. İnönü Muharebesi sonrasında TBMM Hükûmeti ile dostluk antlaşması imzalayan ülke hangisidir?', options:['Afganistan','İtalya','Yunanistan','Bulgaristan'], answer:'Afganistan', explain:'TBMM Hükûmeti ile Afganistan arasında 1921’de dostluk antlaşması imzalandı.' },
+      { id:'q15', topic:'inonu', prompt:'Türkiye’nin 1921 Anayasası aşağıdaki adlardan hangisiyle bilinir?', options:['Teşkilât-ı Esasiye Kanunu','Kanun-ı Esasi','Sened-i İttifak','Tanzimat Fermanı'], answer:'Teşkilât-ı Esasiye Kanunu', explain:'1921 Anayasası, Teşkilât-ı Esasiye Kanunu adıyla kabul edilmiştir.' },
+      { id:'q16', topic:'ikinci-mesrutiyet', prompt:'II. Meşrutiyet döneminde İttihat ve Terakki yönetiminde öne çıkan isimlerden biri kimdir?', options:['Talat Paşa','Namık Kemal','Ziya Paşa','Ali Suavi'], answer:'Talat Paşa', explain:'Talat Paşa, II. Meşrutiyet döneminde İttihat ve Terakki’nin önde gelen isimlerindendir.' },
+      { id:'q17', topic:'ikinci-mesrutiyet', prompt:'Aşağıdakilerden hangisi II. Meşrutiyet dönemiyle ilişkilendirilen isimlerden biridir?', options:['Abdullah Cevdet','Ziya Paşa','Namık Kemal','Mustafa Fazıl Paşa'], answer:'Abdullah Cevdet', explain:'Abdullah Cevdet, II. Meşrutiyet dönemindeki fikir ve siyaset çevreleriyle ilişkilidir.' },
+      { id:'q18', topic:'birinci-mesrutiyet', prompt:'Meşrutiyet düşüncesini savunan ve hürriyet fikirleriyle tanınan Osmanlı aydını kimdir?', options:['Namık Kemal','Enver Paşa','Talat Paşa','Cemal Paşa'], answer:'Namık Kemal', explain:'Namık Kemal, meşrutiyet ve hürriyet düşüncesini savunan önemli Osmanlı aydınlarındandır.' },
+      { id:'q19', topic:'birinci-mesrutiyet', prompt:'Aşağıdakilerden hangisi I. Meşrutiyet dönemi aydınları arasında yer almaz?', options:['Enver Paşa','Ali Suavi','Ziya Paşa','Namık Kemal'], answer:'Enver Paşa', explain:'Enver Paşa, I. Meşrutiyet aydınlarından değil, daha sonraki İttihat ve Terakki döneminin önde gelen isimlerindendir.' },
+      { id:'q20', topic:'tanzimat', prompt:'Tanzimat Fermanı ile kişilerin hangi haklarının güvence altına alınması amaçlanmıştır?', options:['Can, mal ve namus güvenliği','Saltanatın kaldırılması','Halifeliğin kaldırılması','Kapitülasyonların kaldırılması'], answer:'Can, mal ve namus güvenliği', explain:'Tanzimat Fermanı, kişilerin can, mal ve namus güvenliğinin korunmasını öngörmüştür.' },
+      { id:'q21', topic:'tanzimat', prompt:'Tanzimat Fermanı’nda vergilendirmeyle ilgili hangi ilke benimsenmiştir?', options:['Verginin herkesin gelirine göre alınması','Vergilerin tamamen kaldırılması','Yalnızca gayrimüslimlerden vergi alınması','Vergilerin yalnızca askerlerden alınması'], answer:'Verginin herkesin gelirine göre alınması', explain:'Tanzimat Fermanı’nda verginin kişilerin gelirleriyle orantılı biçimde alınması ilkesi yer alır.' },
+      { id:'q22', topic:'tanzimat', prompt:'Tanzimat Fermanı ile aşağıdaki uygulamalardan hangisinin önlenmesi amaçlanmıştır?', options:['Rüşvet ve iltimas','Eğitimin yaygınlaştırılması','Demir yolu yapımı','Meclis seçimleri'], answer:'Rüşvet ve iltimas', explain:'Tanzimat Fermanı, rüşvet ve iltimasın önlenmesine yönelik hükümler içerir.' },
+      { id:'q23', topic:'antlasmalar', prompt:'I. Dünya Savaşı’ndan sonra Almanya ile imzalanan barış antlaşması hangisidir?', options:['Versay','Sevr','Nöyyi','Triyanon'], answer:'Versay', explain:'Almanya ile Versay Antlaşması imzalanmıştır.' },
+      { id:'q24', topic:'antlasmalar', prompt:'I. Dünya Savaşı’ndan sonra Avusturya ile imzalanan antlaşma hangisidir?', options:['Sen Jermen','Sevr','Versay','Nöyyi'], answer:'Sen Jermen', explain:'Avusturya ile Sen Jermen (Saint-Germain) Antlaşması imzalanmıştır.' },
+      { id:'q25', topic:'antlasmalar', prompt:'I. Dünya Savaşı’ndan sonra Bulgaristan ile imzalanan antlaşma hangisidir?', options:['Nöyyi (Neuilly)','Triyanon (Trianon)','Sevr','Versay'], answer:'Nöyyi (Neuilly)', explain:'Bulgaristan ile Nöyyi (Neuilly) Antlaşması imzalanmıştır.' },
+      { id:'q26', topic:'antlasmalar', prompt:'I. Dünya Savaşı’ndan sonra Macaristan ile imzalanan antlaşma hangisidir?', options:['Triyanon (Trianon)','Sen Jermen','Versay','Sevr'], answer:'Triyanon (Trianon)', explain:'Macaristan ile Triyanon (Trianon) Antlaşması imzalanmıştır.' },
+      { id:'q27', topic:'antlasmalar', prompt:'Osmanlı Devleti’ne I. Dünya Savaşı sonrasında imzalatılan barış antlaşması hangisidir?', options:['Sevr','Versay','Nöyyi','Triyanon'], answer:'Sevr', explain:'Osmanlı Devleti için Sevr Antlaşması imzalanmıştır.' },
+      { id:'q28', topic:'kadin-haklari', prompt:'Türkiye’de kadınlara tanınan siyasi hakların kronolojik sıralaması hangisidir?', options:['Belediye seçimleri, muhtarlık/köy ihtiyar heyeti, milletvekili seçme-seçilme','Önce milletvekilliği, sonra belediye, sonra muhtarlık','Önce valilik, sonra cumhurbaşkanlığı, sonra belediye','Önce muhtarlık, sonra milletvekilliği, sonra belediye'], answer:'Belediye seçimleri, muhtarlık/köy ihtiyar heyeti, milletvekili seçme-seçilme', explain:'Kronolojik sıra 1930’da belediye, 1933’te muhtarlık/köy ihtiyar heyeti, 1934’te milletvekili haklarıdır.' },
+      { id:'q29', topic:'kadin-haklari', prompt:'Türk kadınlarına milletvekili seçme ve seçilme hakkı hangi yıl verilmiştir?', options:['1934','1923','1930','1945'], answer:'1934', explain:'Kadınlara milletvekili seçme ve seçilme hakkı 1934 yılında tanınmıştır.' },
+      { id:'q30', topic:'kongreler', prompt:'Mustafa Kemal’in Millî Mücadele döneminde katıldığı kongrelerden biri hangisidir?', options:['Erzurum Kongresi','Alaşehir Kongresi','Balıkesir Kongresi','Nazilli Kongresi'], answer:'Erzurum Kongresi', explain:'Erzurum Kongresi, Mustafa Kemal’in katıldığı Millî Mücadele kongrelerinden biridir.' },
+      { id:'q31', topic:'kongreler', prompt:'Mustafa Kemal’in Güney Anadolu’daki Millî Mücadele çalışmaları sırasında katıldığı kongre hangisidir?', options:['Pozantı Kongresi','Amasya Kongresi','Alaşehir Kongresi','Balıkesir Kongresi'], answer:'Pozantı Kongresi', explain:'Mustafa Kemal, 5 Ağustos 1920’de Pozantı Kongresi’ne katılmıştır.' },
+      { id:'q32', topic:'duraklama', prompt:'Osmanlı Devleti’nin Duraklama Dönemi’nde mücadele ettiği denizci Avrupa devletlerinden biri hangisidir?', options:['Venedik','İsveç','Portekiz','Hollanda'], answer:'Venedik', explain:'Venedik, Osmanlı Devleti’nin Duraklama Dönemi’nde mücadele ettiği devletlerden biridir.' },
+      { id:'q33', topic:'duraklama', prompt:'Osmanlı Devleti’nin Duraklama Dönemi’nde doğu sınırında mücadele ettiği devlet hangisidir?', options:['İran','İspanya','İsveç','Portekiz'], answer:'İran', explain:'Osmanlı Devleti, Duraklama Dönemi’nde doğuda İran ile mücadele etmiştir.' },
+      { id:'q34', topic:'opec', prompt:'Aşağıdaki ülkelerden hangisi OPEC’in kurucu üyelerinden biridir?', options:['Kuveyt','Türkiye','Mısır','Brezilya'], answer:'Kuveyt', explain:'Kuveyt, 1960 yılında OPEC’i kuran beş ülke arasında yer alır.' },
+      { id:'q35', topic:'vilayet', prompt:'Vilayet-i Sitte içinde yer alan illerden biri hangisidir?', options:['Van','Amasya','Çorum','Tokat'], answer:'Van', explain:'Vilayet-i Sitte; Bitlis, Erzurum, Sivas, Van, Elazığ ve Diyarbakır’dan oluşur.' },
+      { id:'q36', topic:'inonu', prompt:'I. İnönü Muharebesi sonrasında TBMM Hükûmeti ile Sovyet Rusya arasında imzalanan antlaşma hangisidir?', options:['Moskova Antlaşması','Lozan Antlaşması','Ankara Antlaşması','Gümrü Antlaşması'], answer:'Moskova Antlaşması', explain:'TBMM Hükûmeti ile Sovyet Rusya arasında 1921’de Moskova Antlaşması imzalanmıştır.' }
+    ];
+
+    const STORAGE_KEY = 'nuraOzelTarihDefteri_v1';
+    const defaultStats = { totalSolved: 0, best: 0, tests: 0, attempts: 0, known: [], wrongIds: [] };
+    let stats = loadStats();
+    let session = null;
+    let currentIndex = 0;
+    let expandAllState = false;
+    let toastTimer = null;
+
+    function loadStats() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        return {
+          ...defaultStats,
+          ...saved,
+          known: Array.isArray(saved.known) ? saved.known : [],
+          wrongIds: Array.isArray(saved.wrongIds) ? saved.wrongIds : []
+        };
+      } catch (error) { return { ...defaultStats }; }
+    }
+    function saveStats() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(stats)); }
+      catch (error) { /* Gizli gezinme veya depolama kısıtında site çalışmaya devam eder. */ }
+      updateStatsUI();
+    }
+    function updateStatsUI() {
+      document.getElementById('statSolved').textContent = stats.attempts.toLocaleString('tr-TR');
+      document.getElementById('statBest').textContent = stats.tests ? '%' + stats.best : '—';
+      document.getElementById('statKnown').textContent = stats.known.length.toLocaleString('tr-TR');
+    }
+    function shuffle(array) {
+      const copy = [...array];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>'"]/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' }[char]));
+    }
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+    }
+
+    function renderTopicFilter() {
+      const filter = document.getElementById('topicFilter');
+      topics.forEach(topic => {
+        const option = document.createElement('option');
+        option.value = topic.id;
+        option.textContent = topic.title;
+        filter.appendChild(option);
+      });
+    }
+
+    function renderMemoryCards() {
+      const grid = document.getElementById('memoryGrid');
+      grid.innerHTML = topics.map((topic, index) => {
+        const known = stats.known.includes(topic.id);
+        return `<article class="memory-card ${known ? 'known' : ''}" data-topic-card="${topic.id}">
+          <div class="memory-card-top"><span class="memory-num">KART / ${String(index + 1).padStart(2, '0')}</span><span class="known-mark">${known ? '✓ ÖĞRENİLDİ' : ''}</span></div>
+          <h3>${escapeHTML(topic.title)}</h3>
+          <span class="mnemonic">${escapeHTML(topic.code)}</span>
+          <p class="memory-summary">${escapeHTML(topic.summary)}</p>
+          <div class="memory-details">${escapeHTML(topic.details)}${topic.note ? '\n\nNOT: ' + escapeHTML(topic.note) : ''}</div>
+          <div class="memory-card-bottom"><button class="text-button reveal-card" type="button" aria-expanded="false">Kodu aç ↗</button><button class="text-button mark-known" type="button" data-known="${topic.id}">${known ? 'Öğrendim ✓' : 'Öğrendim işaretle'}</button></div>
+        </article>`;
+      }).join('');
+
+      grid.querySelectorAll('.reveal-card').forEach(button => {
+        button.addEventListener('click', () => {
+          const card = button.closest('.memory-card');
+          const opened = card.classList.toggle('expanded');
+          button.textContent = opened ? 'Kartı kapat ↑' : 'Kodu aç ↗';
+          button.setAttribute('aria-expanded', String(opened));
+        });
+      });
+      grid.querySelectorAll('.mark-known').forEach(button => {
+        button.addEventListener('click', () => {
+          const id = button.dataset.known;
+          if (stats.known.includes(id)) {
+            stats.known = stats.known.filter(item => item !== id);
+            showToast('Kart öğrenilenlerden çıkarıldı.');
+          } else {
+            stats.known.push(id);
+            showToast('Harika Nur, bir kod daha tamamlandı. ♡');
+          }
+          saveStats();
+          renderMemoryCards();
+        });
+      });
+    }
+
+    function startQuiz(wrongOnly = false) {
+      const selectedTopic = document.getElementById('topicFilter').value;
+      let bank = questions.filter(question => selectedTopic === 'all' || question.topic === selectedTopic);
+      if (wrongOnly) bank = bank.filter(question => stats.wrongIds.includes(question.id));
+      if (!bank.length) {
+        renderNoQuestions(wrongOnly);
+        document.getElementById('quizArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+      const countValue = document.getElementById('questionCount').value;
+      const count = countValue === 'all' ? bank.length : Math.min(Number(countValue), bank.length);
+      session = {
+        wrongOnly,
+        questions: shuffle(bank).slice(0, count).map(q => ({ ...q, options: shuffle(q.options) })),
+        answers: {},
+        finished: false
+      };
+      currentIndex = 0;
+      renderQuestion();
+      document.getElementById('quizArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderNoQuestions(wrongOnly) {
+      session = null;
+      document.getElementById('quizArea').innerHTML = `<div class="quiz-empty"><span class="empty-symbol" aria-hidden="true">♡</span><h4>${wrongOnly ? 'Şimdilik yeniden çözülecek soru yok.' : 'Bu konuda henüz soru bulunmuyor.'}</h4><p>${wrongOnly ? 'Bu çok güzel bir şey olabilir! Bir test daha çözerek kendini deneyebilirsin.' : 'Başka bir konu seçip tekrar deneyebilirsin.'}</p><button type="button" class="button button-primary" id="tryAgain" style="margin-top:18px">${wrongOnly ? 'Yeni test çöz' : 'Tüm konuları göster'}</button></div>`;
+      document.getElementById('tryAgain').addEventListener('click', () => {
+        if (wrongOnly) startQuiz(false);
+        else { document.getElementById('topicFilter').value = 'all'; startQuiz(false); }
+      });
+    }
+
+    function renderQuestion() {
+      if (!session) return;
+      const q = session.questions[currentIndex];
+      const topic = topics.find(item => item.id === q.topic);
+      const chosen = session.answers[q.id];
+      const progress = ((currentIndex + 1) / session.questions.length) * 100;
+      const optionLetters = ['A', 'B', 'C', 'D', 'E'];
+      const optionsHTML = q.options.map((option, index) => {
+        let stateClass = '';
+        if (chosen) {
+          if (option === q.answer) stateClass = 'is-correct';
+          else if (option === chosen) stateClass = 'is-wrong';
+        }
+        return `<button class="answer-option ${stateClass}" type="button" data-option="${escapeHTML(option)}" ${chosen ? 'disabled' : ''}>
+          <span class="answer-letter">${optionLetters[index]}</span><span class="answer-text">${escapeHTML(option)}</span>
+        </button>`;
+      }).join('');
+      let feedbackHTML = '';
+      if (chosen) {
+        const correct = chosen === q.answer;
+        feedbackHTML = `<div class="feedback ${correct ? '' : 'wrong'}"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">${correct ? '<path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' : '<path d="M12 8v5m0 3h.01M10.3 3.9 2.8 17.2A2 2 0 0 0 4.5 20h15a2 2 0 0 0 1.7-2.8L13.7 3.9a2 2 0 0 0-3.4 0Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>'}</svg><div><strong>${correct ? 'Aferin Aşkım, doğru' : 'olsun aşkım bişey olmaz.'}</strong>${escapeHTML(q.explain)}${!correct ? '<br><b>Doğru cevap:</b> ' + escapeHTML(q.answer) : ''}</div></div>`;
+      }
+      document.getElementById('quizArea').innerHTML = `<div class="quiz-topline"><span class="topic-pill">${escapeHTML(topic ? topic.title : 'KPSS Tarih')}</span><span>${currentIndex + 1} / ${session.questions.length}</span></div>
+        <div class="progress-track" role="progressbar" aria-label="Test ilerlemesi" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(progress)}"><div class="progress-fill" style="width:${progress}%"></div></div>
+        <h4 class="question-title">${escapeHTML(q.prompt)}</h4>
+        <div class="answer-list">${optionsHTML}</div>
+        ${feedbackHTML}
+        <div class="quiz-controls"><button type="button" class="button button-secondary" id="prevQuestion" ${currentIndex === 0 ? 'disabled' : ''}>← Önceki</button><span class="question-counter">${Object.keys(session.answers).length} soru cevaplandı</span><button type="button" class="button button-primary" id="nextQuestion">${currentIndex === session.questions.length - 1 ? 'Sınavı bitir' : 'Sonraki soru →'}</button></div>`;
+
+      document.querySelectorAll('.answer-option').forEach(button => {
+        button.addEventListener('click', () => chooseAnswer(q, button.dataset.option));
+      });
+      document.getElementById('prevQuestion').addEventListener('click', () => {
+        if (currentIndex > 0) { currentIndex--; renderQuestion(); }
+      });
+      document.getElementById('nextQuestion').addEventListener('click', () => {
+        if (currentIndex < session.questions.length - 1) { currentIndex++; renderQuestion(); }
+        else finishQuiz();
+      });
+    }
+
+    function chooseAnswer(question, choice) {
+      if (!session || session.answers[question.id]) return;
+      session.answers[question.id] = choice;
+      stats.attempts += 1;
+      stats.totalSolved = stats.attempts;
+      if (choice === question.answer) {
+        stats.wrongIds = stats.wrongIds.filter(id => id !== question.id);
+      } else if (!stats.wrongIds.includes(question.id)) {
+        stats.wrongIds.push(question.id);
+      }
+      saveStats();
+      renderQuestion();
+    }
+
+    function finishQuiz() {
+      if (!session || session.finished) return;
+      session.finished = true;
+      const total = session.questions.length;
+      const correct = session.questions.filter(q => session.answers[q.id] === q.answer).length;
+      const skipped = session.questions.filter(q => !session.answers[q.id]).length;
+      const wrong = total - correct - skipped;
+      const score = Math.round(correct / total * 100);
+      stats.tests += 1;
+      stats.best = Math.max(stats.best, score);
+      const mistakes = session.questions.filter(q => session.answers[q.id] && session.answers[q.id] !== q.answer);
+      const skippedQuestions = session.questions.filter(q => !session.answers[q.id]);
+      // Boş bırakılanları da daha sonra "Yanlışlarım" oturumunda tekrar sun.
+      skippedQuestions.forEach(q => { if (!stats.wrongIds.includes(q.id)) stats.wrongIds.push(q.id); });
+      saveStats();
+      const reviewItems = [...mistakes, ...skippedQuestions];
+      const reviewHTML = reviewItems.length ? `<div class="wrong-review"><h4>Birlikte tekrar edelim</h4>${reviewItems.map(q => `<div class="wrong-item"><strong>${escapeHTML(q.prompt)}</strong><span>${q.answers === undefined && session.answers[q.id] ? 'Senin cevabın: ' + escapeHTML(session.answers[q.id]) + ' · ' : 'Boş bırakıldı · '}Doğru cevap: ${escapeHTML(q.answer)}</span></div>`).join('')}</div>` : '<p style="color:var(--green-dark);font-size:13px;margin:15px 0">Bütün cevapların doğru. Seninle gurur duyuyorum, Nur! ♡</p>';
+      document.getElementById('quizArea').innerHTML = `<div class="result-screen"><div class="result-ring" style="--score:${score}%"><strong>%${score}</strong></div><h3>${score >= 85 ? 'Bravo aşkım çok iyi' : score >= 60 ? 'iyi aşkım biraz daha iyi yaparsın.' : 'iyi iyi.'}</h3><p>${score >= 85 ? 'Olur aşkım arada böyle.' : ''}</p><div class="result-stats"><div class="result-stat"><strong>${correct}</strong><span>Doğru</span></div><div class="result-stat"><strong>${wrong}</strong><span>Yanlış</span></div><div class="result-stat"><strong>${skipped}</strong><span>Boş</span></div></div><div class="result-actions"><button class="button button-primary" type="button" id="againQuiz">Bir test daha çöz ↗</button><button class="button button-secondary" type="button" id="reviewErrors">Yanlışları çöz</button></div>${reviewHTML}</div>`;
+      document.getElementById('againQuiz').addEventListener('click', () => startQuiz(false));
+      document.getElementById('reviewErrors').addEventListener('click', () => startQuiz(true));
+    }
+
+    document.getElementById('startQuiz').addEventListener('click', () => startQuiz(false));
+    document.getElementById('wrongOnly').addEventListener('click', () => startQuiz(true));
+    document.getElementById('heroStart').addEventListener('click', () => {
+      document.getElementById('sinav').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => document.getElementById('startQuiz').focus({ preventScroll: true }), 450);
+    });
+    document.getElementById('expandAll').addEventListener('click', () => {
+      expandAllState = !expandAllState;
+      document.querySelectorAll('.memory-card').forEach(card => {
+        card.classList.toggle('expanded', expandAllState);
+        const button = card.querySelector('.reveal-card');
+        button.textContent = expandAllState ? 'Kartı kapat ↑' : 'Kodu aç ↗';
+        button.setAttribute('aria-expanded', String(expandAllState));
+      });
+      document.getElementById('expandAll').textContent = expandAllState ? 'Tüm kartları kapat' : 'Tüm kartları aç';
+    });
+
+    const notes = [
+      'İyi ki benimsin',
+      'Çok güzelsin, çok tatlısın.',
+      'Burnun Çok güzel aşkım',
+    ];
+    let lastNote = 0;
+    document.getElementById('newNote').addEventListener('click', () => {
+      let next = Math.floor(Math.random() * notes.length);
+      if (notes.length > 1 && next === lastNote) next = (next + 1) % notes.length;
+      lastNote = next;
+      const el = document.getElementById('noteMessage');
+      el.style.opacity = '0';
+      setTimeout(() => { el.textContent = notes[next]; el.style.opacity = '1'; }, 130);
+    });
+
+    renderTopicFilter();
+    renderMemoryCards();
+    updateStatsUI();
+  </script>
+</body>
+</html>
